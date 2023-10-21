@@ -7,20 +7,21 @@
         }
     </style>
     <title>WiskundeTermen</title>
-    <script src="script.js"></script> <!-- Voeg een link toe naar het JavaScript-bestand -->
+
     <link rel="icon" href="favoicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Voeg een link toe naar het externe CSS-bestand -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+    <div class="zoekbalk">
+        <input type="text" id="search-box" placeholder="Wiskunde Termen..." onkeydown="zoekOpEnter(event)">
+    </div> 
     <div class="square circle"> <a href="statistiek/index.html" target="_self"></a></div>
     <div class="square top-left"><a href="meetkunde/index.html" target="_self"></a></div>
     <div class="square top-right"><a href="verbanden en formules/index.html" target="_self"></a></div>
     <div class="square bottom-left"><a href="verhoudingen/index.html" target="_self"></a></div>
     <div class="square bottom-right"><a href="getallen en variabelen/index.html" target="_self"></a></div>
     <h1>
-    <div class="search-container">
-        <input type="text" placeholder="Zoeken op WiskundeTermen" class="search-box" id="searchInput" oninput="getSearchSuggestions()">
-        <div id="suggestions"></div>
+        <script src="script.js"></script>
     </h1>
     <div class="container">
         <p class="statistiek">Statistiek</p>

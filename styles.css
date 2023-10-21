@@ -143,8 +143,8 @@ background-color: rgb(255, 0, 153);
 
 .getallenenvariabelen {
     position: absolute;
-    top: 70%; /* Plaats de tekst verticaal in het midden van de container */
-    left: 80%; /* Plaats de tekst horizontaal in het midden van de container */
+    top: 70%;
+    left: 80%;
     transform: translate(-50%, -50%) rotate(-45deg); /* Midden van de tekst is nu in het midden van de container */
     font-size: 600%;
     font-weight: bold;
@@ -153,54 +153,23 @@ background-color: rgb(255, 0, 153);
     white-space: 0.5em;
     text-align: center;
 }
-
-.search-container {
+.zoekbalk {
     position: relative;
-    display: flex;
+    background-color: #ffffff00;
+    padding: 20px;
     align-items: center;
-    width: 400px;
-    margin: 0 auto;
+    z-index: 999;
+    left: 35%;
+}
+
+#search-box {
+    width: 30%;
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    z-index: 999
-}
-
-/* Stijl voor de zoekbalk */
-.search-box {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    z-index: 999
-}
-
-/* Stijl voor de suggesties */
-#suggestions {
-    position: absolute;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    display: none;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-top: none;
-    border-radius: 0 0 4px 4px;
-    z-index: 999
-}
-
-/* Stijl voor een suggestie-item */
-.suggestion-item {
-    padding: 10px;
-    cursor: pointer;
-    z-index: 999
-}
-
-/* Stijl voor een actieve suggestie-item */
-.suggestion-item.active {
-    background-color: #f0f0f0;
-    z-index: 999
+    box-shadow: none;
+    z-index: 999;
+    font-size: 30px;
 }
 
 .koptekst {

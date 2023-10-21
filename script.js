@@ -1,44 +1,52 @@
-var suggestions = document.getElementById('suggestions');
-var searchInput = document.getElementById('searchInput');
+const zoekwoorden = [
+    { woord: "Balk", link: "meetkunde/balk.html" },
+    { woord: "Hoekpunten", link: "meetkunde/hoekpunten.html" },
+    { woord: "Lichamen", link: "meetkunde/Lichamen.html" },
+    { woord: "Rechthoek", link: "meetkunde/Rechthoek.html" },
+    { woord: "Ribben", link: "meetkunde/Ribben.html" },
+    { woord: "zijvlakken", link: "meetkunde/Zijvlakken.html" },
+    { woord: "Vierkant", link: "meetkunde/Vierkant.html" },
+    { woord: "Ruimtefiguren", link: "meetkunde/Ruimtefiguren.html" },
+    // { woord: "", link: "meetkunde/Ribben.html" },
 
-searchInput.addEventListener('blur', function() {
-    setTimeout(function() {
-        suggestions.style.display = 'none';
-    }, 300);
-});
+    // Voeg meer zoekwoorden en links toe zoals je wilt
+];
 
-function getSearchSuggestions() {
-    var query = searchInput.value;
+document.getElementById("search-button").addEventListener("click", zoek);
 
-    // Voeg hier je eigen zoeklogica toe (bijvoorbeeld een API-aanroep naar een zoekmachine).
-    // Voor dit voorbeeld voegen we handmatig enkele suggesties toe.
+function zoek() {
+    const zoekterm = document.getElementById("search-box").value;
+    const resultatenLijst = document.getElementById("resultaten");
+    resultatenLijst.innerHTML = ''; // Wis eerdere zoekresultaten
 
-    var searchSuggestions = ["YouTube video 1", "YouTube video 2", "YouTube video 3", "YouTube video 4", "YouTube video 5"];
+    const overeenkomsten = zoekwoorden.filter(item => item.woord.toLowerCase().includes(zoekterm.toLowerCase()));
 
-    if (query === '') {
-        suggestions.style.display = 'none';
-        return;
-    }
-
-    suggestions.innerHTML = '';
-    searchSuggestions.forEach(function(suggestion) {
-        if (suggestion.toLowerCase().includes(query.toLowerCase())) {
-            var suggestionItem = document.createElement('div');
-            suggestionItem.className = 'suggestion-item';
-            suggestionItem.textContent = suggestion;
-
-            suggestionItem.addEventListener('click', function() {
-                searchInput.value = suggestion;
-                suggestions.style.display = 'none';
-            });
-
-            suggestions.appendChild(suggestionItem);
-        }
-    });
-
-    if (suggestions.children.length > 0) {
-        suggestions.style.display = 'block';
+    if (overeenkomsten.length === 0) {
+        alert("Geen overeenkomsten gevonden.");
     } else {
-        suggestions.style.display = 'none';
+        for (const item of overeenkomsten) {
+            const resultaatItem = document.createElement("li");
+            resultaatItem.textContent = item.woord;
+            resultaatItem.addEventListener("click", function() {
+                window.location.href = item.link; // Navigeer naar de geselecteerde link
+            });
+            resultatenLijst.appendChild(resultaatItem);
+        }
     }
+}
+
+function zoekOpEnter(event) {
+    if (event.key === "Enter") {
+        toonResultatenOpNieuwePagina();
+    }
+}
+
+function toonResultatenOpNieuwePagina() {
+    const zoekterm = document.getElementById("search-box").value;
+    const overeenkomsten = zoekwoorden.filter(item => item.woord.toLowerCase().includes(zoekterm.toLowerCase()));
+    const resultatenHTML = overeenkomsten.map(item => `<li><a href="${item.link}">${item.woord}</a></li>`).join('');
+    const resultatenPagina = `<html><head><title>Zoekresultaten</title><link rel="stylesheet" type="text/css" href="styles.css"></head><body><h1>Zoekresultaten voor "${zoekterm}"</h1><ul>${resultatenHTML}</ul></body></html>`;
+    const nieuwePagina = window.open('', '_blank');
+    nieuwePagina.document.write(resultatenPagina);
+    nieuwePagina.document.close();
 }
