@@ -50,7 +50,21 @@ const zoekwoorden = [
     { woord: "Vierkant", link: "meetkunde/Vierkant.html" },
     { woord: "Vlakke figuren", link: "meetkunde/VlakkeFiguren.html" },
     { woord: "Zijden", link: "meetkunde/Zijden.html" },
-    { woord: "Zijvlakken", link: "meetkunde/Zijvlakken.html" }
+    { woord: "Zijvlakken", link: "meetkunde/Zijvlakken.html" },
+    { woord: "Assenstelsel", link: "meetkunde/Assenstelsel.html" },
+    { woord: "Coördinaten", link: "meetkunde/Coördinaten.html" },
+    { woord: "Horizontaleas", link: "meetkunde/Horizontaleas.html" },
+    { woord: "Oorsprong", link: "meetkunde/Oorsprong.html" },
+    { woord: "Roosterpapier", link: "meetkunde/Roosterpapier.html" },
+    { woord: "Roosterpunt", link: "meetkunde/Roosterpunt.html" },
+    { woord: "Snijpunt", link: "meetkunde/Snijpunt.html" },
+    { woord: "Verticaleas", link: "meetkunde/Verticaleas.html" },
+    { woord: "x-as", link: "meetkunde/X-as.html" },
+    { woord: "x-coördinaat", link: "meetkunde/X-coordinaat.html" },
+    { woord: "y-as", link: "meetkunde/Y-as.html" },
+    { woord: "y-coördinaat", link: "meetkunde/Y-coordinaat.html" },
+    { woord: "Grafiek", link: "meetkunde/Grafiek.html" }
+    
     // { woord: "", link: "meetkunde/Ribben.html" },
 
     // Voeg meer zoekwoorden en links toe zoals je wilt
