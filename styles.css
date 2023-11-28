@@ -101,7 +101,7 @@ background-color: rgb(255, 0, 153);
     top: 40%; /* Plaats de tekst verticaal in het midden van de container */
     left: 50%; /* Plaats de tekst horizontaal in het midden van de container */
     transform: translate(-50%, -50%); /* Midden van de tekst is nu in het midden van de container */
-    font-size: 600%;
+    font-size: 500%;
     font-weight: bold;
     color: #00eaff;
     z-index: 990; /* Zet de tekst op de voorgrond */
@@ -111,7 +111,7 @@ background-color: rgb(255, 0, 153);
     top: 10%; /* Plaats de tekst verticaal in het midden van de container */
     left: 20%; /* Plaats de tekst horizontaal in het midden van de container */
     transform: translate(-50%, -50%) rotate(-45deg); /* Midden van de tekst is nu in het midden van de container */
-    font-size: 600%;
+    font-size: 500%;
     font-weight: bold;
     color: #aa00ff;
     z-index: 990; /* Zet de tekst op de voorgrond */
@@ -122,7 +122,7 @@ background-color: rgb(255, 0, 153);
     top: 70%; /* Plaats de tekst verticaal in het midden van de container */
     left: 20%; /* Plaats de tekst horizontaal in het midden van de container */
     transform: translate(-50%, -50%) rotate(45deg); /* Midden van de tekst is nu in het midden van de container */
-    font-size: 600%;
+    font-size: 500%;
     font-weight: bold;
     color: #fff200;
     z-index: 990; /* Zet de tekst op de voorgrond */
@@ -133,7 +133,7 @@ background-color: rgb(255, 0, 153);
     top: 20%; /* Plaats de tekst verticaal in het midden van de container */
     left: 80%; /* Plaats de tekst horizontaal in het midden van de container */
     transform: translate(-50%, -50%) rotate(45deg); /* Midden van de tekst is nu in het midden van de container */
-    font-size: 600%;
+    font-size: 500%;
     font-weight: bold;
     color: #00a6ff;
     z-index: 990; /* Zet de tekst op de voorgrond */
@@ -146,7 +146,7 @@ background-color: rgb(255, 0, 153);
     top: 70%;
     left: 80%;
     transform: translate(-50%, -50%) rotate(-45deg); /* Midden van de tekst is nu in het midden van de container */
-    font-size: 600%;
+    font-size: 500%;
     font-weight: bold;
     color: #00ff6a;
     z-index: 990; /* Zet de tekst op de voorgrond */
