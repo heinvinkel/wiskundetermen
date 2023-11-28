@@ -51,22 +51,31 @@ const zoekwoorden = [
     { woord: "Vlakke figuren", link: "meetkunde/VlakkeFiguren.html" },
     { woord: "Zijden", link: "meetkunde/Zijden.html" },
     { woord: "Zijvlakken", link: "meetkunde/Zijvlakken.html" },
+    // verbanden en formules
     { woord: "Assenstelsel", link: "verbanden en formules/Assenstelsel.html" },
+    { woord: "Constant", link: "verbanden en formules/Constant.html" },
     { woord: "Coördinaten", link: "verbanden en formules/Coördinaten.html" },
+    { woord: "Dalen", link: "verbanden en formules/Dalen.html" },
+    { woord: "Formule", link: "verbanden en formules/Formule.html" },
+    { woord: "Globalegrafiek", link: "verbanden en formules/Globalegrafiek.html" },
+    { woord: "Grafiek", link: "verbanden en formules/Grafiek.html" },
     { woord: "Horizontaleas", link: "verbanden en formules/Horizontaleas.html" },
+    { woord: "Kreukellijn", link: "verbanden en formules/Kreukellijn.html" },
     { woord: "Oorsprong", link: "verbanden en formules/Oorsprong.html" },
     { woord: "Roosterpapier", link: "verbanden en formules/Roosterpapier.html" },
     { woord: "Roosterpunt", link: "verbanden en formules/Roosterpunt.html" },
+    { woord: "Scheurlijn", link: "verbanden en formules/Scheurlijn.html" },
     { woord: "Snijpunt", link: "verbanden en formules/Snijpunt.html" },
+    { woord: "Stijgen", link: "verbanden en formules/Stijgen.html" },
+    { woord: "Tabel", link: "verbanden en formules/Tabel.html" },
     { woord: "Verticaleas", link: "verbanden en formules/Verticaleas.html" },
-    { woord: "x-as", link: "verbanden en formules/X-as.html" },
-    { woord: "x-coördinaat", link: "verbanden en formules/X-coordinaat.html" },
-    { woord: "y-as", link: "verbanden en formules/Y-as.html" },
-    { woord: "y-coördinaat", link: "verbanden en formules/Y-coordinaat.html" },
-    { woord: "Grafiek", link: "verbanden en formules/Grafiek.html" }
-    
-    // { woord: "", link: "meetkunde/Ribben.html" },
-
+    { woord: "Vloeiendekromme", link: "verbanden en formules/Vloeiendekromme.html" },
+    { woord: "Woordformule", link: "verbanden en formules/Woordformule.html" },
+    { woord: "X-as", link: "verbanden en formules/X-as.html" },
+    { woord: "X-coördinaat", link: "verbanden en formules/X-coördinaat.html" },
+    { woord: "Y-as", link: "verbanden en formules/Y-as.html" },
+    { woord: "Y-coördinaat", link: "verbanden en formules/Y-coördinaat.html" },
+    { woord: "Zaagtand", link: "verbanden en formules/Zaagtand.html" }
     // Voeg meer zoekwoorden en links toe zoals je wilt
 ];
 
