@@ -130,8 +130,8 @@ background-color: rgb(255, 0, 153);
 
 .verbandenenformules {
     position: absolute;
-    top: 20%; /* Plaats de tekst verticaal in het midden van de container */
-    left: 80%; /* Plaats de tekst horizontaal in het midden van de container */
+    top: 10%; /* Plaats de tekst verticaal in het midden van de container */
+    left: 70%; /* Plaats de tekst horizontaal in het midden van de container */
     transform: translate(-50%, -50%) rotate(45deg); /* Midden van de tekst is nu in het midden van de container */
     font-size: 500%;
     font-weight: bold;
@@ -143,8 +143,8 @@ background-color: rgb(255, 0, 153);
 
 .getallenenvariabelen {
     position: absolute;
-    top: 70%;
-    left: 80%;
+    top: 80%;
+    left: 70%;
     transform: translate(-50%, -50%) rotate(-45deg); /* Midden van de tekst is nu in het midden van de container */
     font-size: 500%;
     font-weight: bold;
