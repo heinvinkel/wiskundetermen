@@ -75,8 +75,19 @@ const zoekwoorden = [
     { woord: "X-coördinaat", link: "verbanden en formules/X-coördinaat.html" },
     { woord: "Y-as", link: "verbanden en formules/Y-as.html" },
     { woord: "Y-coördinaat", link: "verbanden en formules/Y-coördinaat.html" },
-    { woord: "Zaagtand", link: "verbanden en formules/Zaagtand.html" }
+    { woord: "Zaagtand", link: "verbanden en formules/Zaagtand.html" },
+    // Getallen en Variabelen
+    { woord: "Afronden", link: "getallen en variabelen/afronden.html" },
+    { woord: "Cijfers", link: "getallen en variabelen/cijfers.html" },
+    { woord: "Decimalen getallen", link: "getallen en variabelen/decimalengetallen.html" },
+    { woord: "Gehele getallen", link: "getallen en variabelen/gehelegetallen.html" },
+    { woord: "Getallen", link: "getallen en variabelen/getallen.html" },
+    { woord: "Komma", link: "getallen en variabelen/komma.html" },
+    { woord: "Komma getallen", link: "getallen en variabelen/kommagetallen.html" },
+    { woord: "minteken", link: "getallen en variabelen/minteken.html" },
+    { woord: "Negatieve getallen", link: "getallen en variabelen/negatievegetallen.html" }
     // Voeg meer zoekwoorden en links toe zoals je wilt
+
 ];
 
 document.getElementById("search-button").addEventListener("click", zoek);
