@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px; /* Volledige breedte container */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px; /* Grotere ruimte tussen rijen */
+    display: flex;
+    justify-content: space-between; /* Kolommen uitlijnen met ruimte ertussen */
+}
+
+span {
+    flex: 1;
+    padding-right: 10px;
+}
+
+button {
+    width: 50px; /* Grotere knoppen voor mobiel */
+    height: 50px;
+    font-size: 20px;
+}
+
+/* Stijl voor alternerend kleuren */
+#namenlijst li:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+#namenlijst li:nth-child(even) {
+    background-color: #309b33;
+}
+
