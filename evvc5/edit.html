@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cijfers Bewerken</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Cijfers Bewerken</h1>
+    <div class="container">
+        <form id="loginForm">
+            <label for="password">Wachtwoord:</label>
+            <input type="password" id="password" name="password">
+            <button type="submit">Inloggen</button>
+        </form>
+        <ul id="namenlijst" style="display:none;">
+            <li>
+                <span>Speler</span>
+                <span>tot. Schuldig</span>
+                <span>Gegeven</span>
+                <span>Nog te geven</span>
+                <span>Datum</span>
+                <span>Jarig geweest?</span>
+            </li>
+            <li>
+                <span>Arno</span>
+                <span id="cijfer1-1" class="cijfer">0</span>
+                <span id="cijfer1-2" class="cijfer">0</span>
+                <span id="totaal1" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(1, 1)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(1, 1)">-</button>
+                <button class="verhoog-knop" onclick="verhoogCijfer(1, 2)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(1, 2)">-</button>
+                <span>15-mrt</span>
+                <span id="cijfer1-4" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(1, 4)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(1, 4)">-</button>
+            </li>
+            <li>
+                <span>Bart</span>
+                <span id="cijfer2-1" class="cijfer">0</span>
+                <span id="cijfer2-2" class="cijfer">0</span>
+                <span id="totaal2" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(2, 1)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(2, 1)">-</button>
+                <button class="verhoog-knop" onclick="verhoogCijfer(2, 2)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(2, 2)">-</button>
+                <span>23-mei</span>
+                <span id="cijfer2-4" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(2, 4)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(2, 4)">-</button>
+            </li>
+            <li>
+                <span>Ben</span>
+                <span id="cijfer3-1" class="cijfer">0</span>
+                <span id="cijfer3-2" class="cijfer">0</span>
+                <span id="totaal3" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(3, 1)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(3, 1)">-</button>
+                <button class="verhoog-knop" onclick="verhoogCijfer(3, 2)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(3, 2)">-</button>
+                <span>25-jan</span>
+                <span id="cijfer3-4" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(3, 4)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(3, 4)">-</button>
+            </li>
+            <li>
+                <span>Bram</span>
+                <span id="cijfer4-1" class="cijfer">0</span>
+                <span id="cijfer4-2" class="cijfer">0</span>
+                <span id="totaal4" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(4, 1)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(4, 1)">-</button>
+                <button class="verhoog-knop" onclick="verhoogCijfer(4, 2)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(4, 2)">-</button>
+                <span>6-dec</span>
+                <span id="cijfer4-4" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(4, 4)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(4, 4)">-</button>
+            </li>
+            <li>
+                <span>Cas</span>
+                <span id="cijfer5-1" class="cijfer">0</span>
+                <span id="cijfer5-2" class="cijfer">0</span>
+                <span id="totaal5" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(5, 1)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(5, 1)">-</button>
+                <button class="verhoog-knop" onclick="verhoogCijfer(5, 2)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(5, 2)">-</button>
+                <span>7-nov</span>
+                <span id="cijfer5-4" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(5, 4)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(5, 4)">-</button>
+            </li>
+            <li>
+                <span>Geert</span>
+                <span id="cijfer6-1" class="cijfer">0</span>
+                <span id="cijfer6-2" class="cijfer">0</span>
+                <span id="totaal6" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(6, 1)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(6, 1)">-</button>
+                <button class="verhoog-knop" onclick="verhoogCijfer(6, 2)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(6, 2)">-</button>
+                <span>26-feb</span>
+                <span id="cijfer6-4" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(6, 4)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(6, 4)">-</button>
+            </li>
+            <li>
+                <span>Giel</span>
+                <span id="cijfer7-1" class="cijfer">0</span>
+                <span id="cijfer7-2" class="cijfer">0</span>
+                <span id="totaal7" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(7, 1)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(7, 1)">-</button>
+                <button class="verhoog-knop" onclick="verhoogCijfer(7, 2)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(7, 2)">-</button>
+                <span>28-mrt</span>
+                <span id="cijfer7-4" class="cijfer">0</span>
+                <button class="verhoog-knop" onclick="verhoogCijfer(7, 4)">+</button>
+                <button class="verlaag-knop" onclick="verlaagCijfer(7, 4)">-</button>
+            </li>
+            
+
+            
+            <!-- Voeg meer lijsten toe zoals hierboven indien nodig -->
+        </ul>
+    </div>
+
+    <script src="edit.js"></script>
+</body>
+</html>
