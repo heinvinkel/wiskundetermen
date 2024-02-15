@@ -32,16 +32,12 @@ button {
     font-size: 20px;
 }
 
-.totaal-rij {
-    display: flex; /* Weergave als flex-container */
-    justify-content: space-between; /* Uitlijnen met ruimte ertussen */
-    align-items: center; /* Verticaal centreren */
+/* Stijl voor alternerend kleuren */
+#namenlijst li:nth-child(odd) {
+    background-color: #ffffff;
 }
 
-.clicked {
-    color: green;
+#namenlijst li:nth-child(even) {
+    background-color: #309b33;
 }
 
-.clicked.red {
-    color: red;
-}
