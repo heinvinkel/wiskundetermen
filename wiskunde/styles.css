@@ -1,0 +1,229 @@
+/* Algemene stijl voor de hele pagina */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    
+
+}
+.overflow-container {
+    overflow: hidden;
+}
+/* Stijl voor de vierkanten */
+.square {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    cursor: pointer;
+}
+
+/* Stijl voor elk van de vier hoeken */
+.top-left {
+    top: 0;
+    left: 0;
+    background-color: blue;
+}
+    .top-left:hover {
+    background-color: rgb(0, 60, 255);
+    
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+    background-color: red;
+}
+
+.top-right:hover {
+background-color: rgb(255, 0, 153);
+
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+    background-color: green;
+}
+
+.bottom-left:hover {
+    background-color:rgb(49, 128, 0);
+    
+    }
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+    background-color: yellow;
+}
+
+.bottom-right:hover {
+    background-color: rgb(255, 213, 0);
+    
+    }
+
+/* Stijl voor de links */
+.square a {
+    background-position-x: 0%;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* Stijl voor de witte cirkel */
+.circle {
+    width: 50%;
+    height: 50%;
+    background-color:purple;
+    border-radius: 50%; /* Hiermee maak je een cirkel */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Om het element in het midden te positioneren */
+    z-index: 900; /* Zet de z-index op een hoog getal om de cirkel bovenaan de z-stack te plaatsen */
+    overflow: hidden
+}
+.circle:hover {
+    background-color:rgb(102, 0, 128);
+}
+
+/* Stijl voor de container */
+.container {
+    position: center; /* Positioneeringscontext voor de tekst */
+    width: 100%;
+    height: 100vh;
+    background-color: #f0f0f000; /* Achtergrondkleur om het effect te illustreren */
+    pointer-events: none;
+}
+
+/* Stijl voor de tekst op de voorgrond */
+.statistiek {
+    position: absolute;
+    top: 40%; /* Plaats de tekst verticaal in het midden van de container */
+    left: 50%; /* Plaats de tekst horizontaal in het midden van de container */
+    transform: translate(-50%, -50%); /* Midden van de tekst is nu in het midden van de container */
+    font-size: 400%;
+    font-weight: bold;
+    color: #00eaff;
+    z-index: 990; /* Zet de tekst op de voorgrond */
+}
+.meetkunde {
+    position: absolute;
+    top: 10%; /* Plaats de tekst verticaal in het midden van de container */
+    left: 20%; /* Plaats de tekst horizontaal in het midden van de container */
+    transform: translate(-50%, -50%) rotate(0deg); /* Midden van de tekst is nu in het midden van de container */
+    font-size: 400%;
+    font-weight: bold;
+    color: #aa00ff;
+    z-index: 990; /* Zet de tekst op de voorgrond */
+}
+
+.verhoudingen {
+    position: absolute;
+    top: 70%; /* Plaats de tekst verticaal in het midden van de container */
+    left: 20%; /* Plaats de tekst horizontaal in het midden van de container */
+    transform: translate(-50%, -50%) rotate(0); /* Midden van de tekst is nu in het midden van de container */
+    font-size: 400%;
+    font-weight: bold;
+    color: #fff200;
+    z-index: 990; /* Zet de tekst op de voorgrond */
+}
+
+.verbandenenformules {
+    position: absolute;
+    top: 10%; /* Plaats de tekst verticaal in het midden van de container */
+    left: 85%; /* Plaats de tekst horizontaal in het midden van de container */
+    transform: translate(-50%, -50%) rotate(0); /* Midden van de tekst is nu in het midden van de container */
+    font-size: 400%;
+    font-weight: bold;
+    color: #00a6ff;
+    z-index: 990; /* Zet de tekst op de voorgrond */
+    white-space: 0.5em;
+    text-align: center;
+}
+
+.getallenenvariabelen {
+    position: absolute;
+    top: 70%;
+    left: 85%;
+    transform: translate(-50%, -50%) rotate(0deg); /* Midden van de tekst is nu in het midden van de container */
+    font-size: 400%;
+    font-weight: bold;
+    color: #00ff6a;
+    z-index: 990; /* Zet de tekst op de voorgrond */
+    white-space: 0.5em;
+    text-align: center;
+}
+.zoekbalk {
+    position: relative;
+    background-color: #ffffff00;
+    padding: 20px;
+    align-items: center;
+    z-index: 999;
+    left: 35%;
+}
+
+#search-box {
+    width: 30%;
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    padding: 10px;
+    box-shadow: none;
+    z-index: 999;
+    font-size: 30px;
+}
+
+.koptekst {
+    text-align: center;
+    font-size: 200%;
+    top: 20px;
+    color: #aa00ff;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* Verwijder onderlijning van de links */
+    margin: 5px;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}
+
+/* Stijl voor de container van de knoppen */
+.button-column {
+    text-align: center;
+}
+
+/* Stijl voor de container van de knoppen om ze onder elkaar te stapelen */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+.button:hover {
+    background-color: #2980b9;
+}
+header {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 2px;
+    text-align: center;
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
+
+.video {
+    width: 800px;
+    height: 450px;
+}
