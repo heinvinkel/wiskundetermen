@@ -55,7 +55,7 @@ generateButton.addEventListener("click", () => {
     // Voeg de "Uitwerkingen" toe als checkbox is aangevinkt
     const uitwerkingenCheckbox = document.getElementById("uitwerkingen");
     if (uitwerkingenCheckbox.checked) {
-        parts.push("Uitwerkingen");
+        parts.push("- Uitwerkingen");
     }
 
     if (parts.length === 2) { // Alleen "PW -" en niveau+leerjaar aanwezig

@@ -23,9 +23,17 @@
                     <input type="radio" name="wiskunde" value="- wis"> Wis
                 </label>
             </div>
-
+            
             <!-- Leerjaar en Toetsnummer -->
             <div class="leerjaar-toets">
+                <select id="klasSelect">
+                    <option value="">Selecteer Niveau</option>
+                    <option value="HM">Havo/Mavo</option>
+                    <option value="H">Havo</option>
+                    <option value="HV">Havo/VWO</option>
+                    <option value="V">VWO</option>
+                </select>
+
                 <select id="leerjaarSelect">
                     <option value="">Selecteer Leerjaar</option>
                     <option value="1">1</option>
@@ -70,13 +78,6 @@
 
         <!-- Klas, Versie en Editie -->
         <div>
-            <select id="klasSelect">
-                <option value="">Selecteer Niveau</option>
-                <option value="HM">HM</option>
-                <option value="H">H</option>
-                <option value="HV">HV</option>
-                <option value="V">V</option>
-            </select>
 
             <select id="versieSelect">
                 <option value="- versie A" selected>Versie A</option>
