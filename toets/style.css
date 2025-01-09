@@ -1,0 +1,149 @@
+/* Algemene body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f8fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styling */
+.container {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titel styling */
+h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Flex container voor wiskunde opties, leerjaar en toetsnummer */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Styling voor de wiskunde opties */
+.wiskunde-options {
+    display: flex;
+    gap: 15px;
+}
+
+.wiskunde-options input {
+    margin: 0;
+    transform: scale(1.2);
+}
+
+/* Leerjaar en toetsnummer styling */
+.leerjaar-toets select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    margin-left: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Hoofdstukken styling */
+div input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-right: 10px;
+}
+
+div label {
+    font-size: 16px;
+    margin-right: 15px;
+}
+
+/* Klas, versie en editie dropdown styling */
+select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Knop styling */
+button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Genereerde naam styling */
+#generatedName {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 25px;
+    text-align: center;
+    background-color: #e0f7fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Voeg deze CSS toe in je style.css bestand */
+
+/* Standaard styling voor de container */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Grid styling voor hoofdstukken met een beperking van 6 per regel */
+.hoofdstukken {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Zorgt voor 6 kolommen */
+    gap: 10px; /* Ruimte tussen de checkboxen */
+    justify-content: center;
+}
+
+.hoofdstukken label {
+    text-align: center;
+    margin-bottom: 10px; /* Ruimte onder de checkboxen */
+}
+
+/* Styling voor de knoppen en select elementen */
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+select {
+    padding: 5px;
+    font-size: 16px;
+    margin: 5px;
+}
+
+

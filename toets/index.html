@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document naam maken</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Document naam maken</h1>
+
+        <!-- Wiskunde opties en Leerjaar/Toetsnummer in een flex container -->
+        <div class="flex-container">
+            <div class="wiskunde-options">
+                <label>
+                    <input type="radio" name="wiskunde" value="wisa"> WisA
+                </label>
+                <label>
+                    <input type="radio" name="wiskunde" value="wisb"> WisB
+                </label>
+                <label>
+                    <input type="radio" name="wiskunde" value="wis"> Wis
+                </label>
+            </div>
+
+            <!-- Leerjaar en Toetsnummer -->
+            <div class="leerjaar-toets">
+                <select id="leerjaarSelect">
+                    <option value="">Selecteer Leerjaar</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+
+                <select id="toetsnummerSelect">
+                    <option value="">Selecteer Toetsnummer</option>
+                    <option value="01 -">01</option>
+                    <option value="02 -">02</option>
+                    <option value="03 -">03</option>
+                    <option value="04 -">04</option>
+                    <option value="05 -">05</option>
+                    <option value="06 -">06</option>
+                    <option value="07 -">07</option>
+                    <option value="08 -">08</option>
+                    <option value="09 -">09</option>
+                    <option value="10 -">10</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Hoofdstukken (met checkboxen) -->
+        <div class="hoofdstukken">
+            <label><input type="checkbox" name="hoofdstukken" value="H1"> H1</label>
+            <label><input type="checkbox" name="hoofdstukken" value="H2"> H2</label>
+            <label><input type="checkbox" name="hoofdstukken" value="H3"> H3</label>
+            <label><input type="checkbox" name="hoofdstukken" value="H4"> H4</label>
+            <label><input type="checkbox" name="hoofdstukken" value="H5"> H5</label>
+            <label><input type="checkbox" name="hoofdstukken" value="H6"> H6</label>
+            <label><input type="checkbox" name="hoofdstukken" value="H7"> H7</label>
+            <label><input type="checkbox" name="hoofdstukken" value="H8"> H8</label>
+            <label><input type="checkbox" name="hoofdstukken" value="H9"> H9</label>
+            <label><input type="checkbox" name="hoofdstukken" value="H10"> H10</label>
+            <label><input type="checkbox" name="hoofdstukken" value="H11"> H11</label>
+            <label><input type="checkbox" name="hoofdstukken" value="H12"> H12</label>
+        </div>
+
+        <!-- Klas, Versie en Editie -->
+        <div>
+            <select id="klasSelect">
+                <option value="">Selecteer Niveau</option>
+                <option value="- HM">HM</option>
+                <option value="- H">H</option>
+                <option value="- HV">HV</option>
+                <option value="- V">V</option>
+            </select>
+
+            <select id="versieSelect">
+                <option value="- versie A" selected>Versie A</option>
+                <option value="- versie B">Versie B</option>
+                <option value="- versie C">Versie C</option>
+                <option value="- versie D">Versie D</option>
+            </select>
+
+            <select id="editieSelect">
+                <option value="- Editie 12">Editie 12</option>
+                <option value="- Editie 13" selected>Editie 13</option>
+                <option value="- Editie 14">Editie 14</option>
+                <option value="- Editie 15">Editie 15</option>
+            </select>
+        </div>
+        <div>
+        
+            <!-- Voeg het "uitwerkingen" aanvinkvakje toe rechts van de editie optie -->
+            <label>
+                <input type="checkbox" id="uitwerkingen"> Uitwerkingen?
+            </label>
+        </div>
+        
+        <!-- Genereren knop -->
+        <button id="generateButton">Genereer Naam</button>
+
+        <!-- Weergeven van de gegenereerde naam -->
+        <div id="generatedName"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
