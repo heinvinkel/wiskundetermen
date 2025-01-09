@@ -5,21 +5,34 @@ generateButton.addEventListener("click", () => {
     const selects = document.querySelectorAll("select");
     const parts = [];
 
-    // Verzamel de Wiskunde optie en voeg deze samen met Leerjaar en Toetsnummer
+    // Voeg "PW -" toe als vaste prefix aan de naam
+    parts.push("PW -");
+
+    // Verzamel niveau (klas) en leerjaar, en combineer ze
+    const klas = document.getElementById("klasSelect").value;
+    const leerjaar = document.getElementById("leerjaarSelect").value;
+
+    if (klas && leerjaar) {
+        parts.push(`${klas}${leerjaar}`); // Combineer niveau en leerjaar, bijvoorbeeld "HM1"
+    } else {
+        alert("Selecteer zowel een niveau als een leerjaar!");
+        return;
+    }
+
+    // Verzamel de Wiskunde optie
     const wiskundeOption = document.querySelector('input[name="wiskunde"]:checked');
     let wiskundeValue = "wis"; // Standaard waarde als geen keuze gemaakt wordt
     if (wiskundeOption) {
         wiskundeValue = wiskundeOption.value; // WisA of WisB
     }
 
-    // Verzamel Leerjaar en Toetsnummer en voeg deze toe samen met de wiskunde-optie zonder spaties
-    const leerjaar = document.getElementById("leerjaarSelect").value;
     const toetsnummer = document.getElementById("toetsnummerSelect").value;
 
-    if (leerjaar && toetsnummer) {
-        parts.push(`${wiskundeValue}${leerjaar}${toetsnummer}`); // Plak de wiskunde waarde direct aan Leerjaar en Toetsnummer zonder spaties
-    } else if (leerjaar || toetsnummer) {
-        alert("Selecteer zowel een leerjaar als een toetsnummer!");
+    if (toetsnummer) {
+        // Voeg wiskunde-optie, leerjaar en toetsnummer toe in de juiste volgorde
+        parts.push(`${wiskundeValue}${leerjaar}${toetsnummer}`); // Bijvoorbeeld "wisA01" of "wisB02"
+    } else {
+        alert("Selecteer een toetsnummer!");
         return;
     }
 
@@ -32,9 +45,9 @@ generateButton.addEventListener("click", () => {
         parts.push(hoofdstukken);
     }
 
-    // Verzamel de overige dropdown-waarden (Klas, Versie, Editie)
+    // Verzamel de overige dropdown-waarden (Versie, Editie)
     selects.forEach(select => {
-        if (select.value !== "" && select.id !== "leerjaarSelect" && select.id !== "toetsnummerSelect") {
+        if (select.value !== "" && select.id !== "leerjaarSelect" && select.id !== "toetsnummerSelect" && select.id !== "klasSelect") {
             parts.push(select.value);
         }
     });
@@ -45,7 +58,7 @@ generateButton.addEventListener("click", () => {
         parts.push("Uitwerkingen");
     }
 
-    if (parts.length === 0) {
+    if (parts.length === 2) { // Alleen "PW -" en niveau+leerjaar aanwezig
         alert("Selecteer minstens één waarde!");
         return;
     }
