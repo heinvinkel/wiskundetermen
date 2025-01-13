@@ -28,9 +28,8 @@ h1 {
 /* Flex container voor wiskunde opties, leerjaar en toetsnummer */
 .flex-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+    justify-content: center; /* Horizontaal centreren */
+    align-items: center;    /* Verticaal centreren */
 }
 
 /* Styling voor de wiskunde opties */
