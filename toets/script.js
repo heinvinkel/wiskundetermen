@@ -13,7 +13,7 @@ generateButton.addEventListener("click", () => {
     const leerjaar = document.getElementById("leerjaarSelect").value;
 
     if (klas && leerjaar) {
-        parts.push(`${klas}${leerjaar}`); // Combineer niveau en leerjaar, bijvoorbeeld "HM1"
+        parts.push(`${leerjaar}${klas}`); // Combineer niveau en leerjaar, bijvoorbeeld "HM1"
     } else {
         alert("Selecteer zowel een niveau als een leerjaar!");
         return;
