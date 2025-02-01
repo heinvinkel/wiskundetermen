@@ -1,0 +1,134 @@
+/* Algemene stijlen */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin: 10px 0 0;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 100%;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mySlides {
+    display: none;
+    animation: fade 1.5s ease-in-out;
+}
+
+.mySlides img {
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+}
+
+@keyframes fade {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
+.text {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+/* Navigatieknoppen */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 20px;
+    margin-top: -30px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    transition: 0.3s ease;
+    border-radius: 0 5px 5px 0;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.next {
+    right: 0;
+    border-radius: 5px 0 0 5px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+/* Logo styling */
+.logo-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.logo { width: 155px; }
+
+/* Responsive design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    .mySlides img {
+        height: 60vh;
+    }
+
+    .text {
+        font-size: 1.2rem;
+        bottom: 10px;
+    }
+
+    .prev, .next {
+        padding: 15px;
+        font-size: 20px;
+    }
+}

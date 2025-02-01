@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Timmerprojecten</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Timmerman Logo" class="logo">
+        </div>
+        <h1>Marc van Wanrooij</h1>
+        <p>Ontdek mijn werk als timmerman</p>
+    </header>
+
+    <main>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="images/project1.jpg" alt="Project 1">
+                <div class="text">Project 1: Keukenkastjes</div>
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/project2.jpg" alt="Project 2">
+                <div class="text">Project 2: Tuinhuis</div>
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/project3.jpg" alt="Project 3">
+                <div class="text">Project 3: Boekenkast</div>
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy;2025 Marc van Wanrooij</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
