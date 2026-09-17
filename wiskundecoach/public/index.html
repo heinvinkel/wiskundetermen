@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WiskundeCoach</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">∑</span>
+            <div>
+                <h1>WiskundeCoach</h1>
+                <p>Jouw persoonlijke wiskundehulp</p>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="container">
+
+        <section class="welcome">
+            <h2>Waar kan ik je mee helpen?</h2>
+            <p>
+                Ik help je stap voor stap met wiskunde.
+                Ik geef niet meteen het antwoord, maar help je het zelf te vinden.
+            </p>
+        </section>
+
+
+        <section class="topics">
+
+            <button class="topic-button" data-topic="Algebra">
+                <span>𝑥</span>
+                <strong>Algebra</strong>
+                <small>Vergelijkingen & formules</small>
+            </button>
+
+            <button class="topic-button" data-topic="Functies">
+                <span>📈</span>
+                <strong>Functies</strong>
+                <small>Grafieken & verbanden</small>
+            </button>
+
+            <button class="topic-button" data-topic="Meetkunde">
+                <span>△</span>
+                <strong>Meetkunde</strong>
+                <small>Hoeken, lijnen & figuren</small>
+            </button>
+
+            <button class="topic-button" data-topic="Rekenen">
+                <span>÷</span>
+                <strong>Rekenen</strong>
+                <small>Breuken, procenten & verhoudingen</small>
+            </button>
+
+        </section>
+
+
+        <section class="chat-container">
+
+            <div class="chat-header">
+                <div>
+                    <strong>WiskundeCoach</strong>
+                    <span class="status">
+                        <span class="status-dot"></span>
+                        Online
+                    </span>
+                </div>
+
+                <button id="clearChat" class="clear-button">
+                    Nieuw gesprek
+                </button>
+            </div>
+
+
+            <div id="chatMessages" class="chat-messages">
+
+                <div class="message assistant">
+                    <div class="avatar">∑</div>
+
+                    <div class="message-content">
+                        <p>
+                            Hoi! 👋 Ik ben je WiskundeCoach.
+                        </p>
+
+                        <p>
+                            Vertel me waar je vastloopt. Geef bijvoorbeeld een
+                            som of leg uit wat je niet begrijpt.
+                        </p>
+
+                        <p>
+                            <strong>Probeer bijvoorbeeld:</strong><br>
+                            "Ik snap niet hoe ik 3x + 7 = 22 moet oplossen."
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="input-area">
+
+                <textarea
+                    id="userInput"
+                    placeholder="Typ hier je vraag of wiskundesom..."
+                    rows="2"
+                ></textarea>
+
+                <button id="sendButton" class="send-button">
+                    <span>Verstuur</span>
+                    <span>➤</span>
+                </button>
+
+            </div>
+
+            <div class="input-help">
+                Druk op Enter om te versturen · Shift + Enter voor een nieuwe regel
+            </div>
+
+        </section>
+
+
+        <section class="teacher-note">
+
+            <div class="teacher-icon">👩‍🏫</div>
+
+            <div>
+                <strong>Voor leerlingen</strong>
+                <p>
+                    De coach helpt je nadenken. Probeer eerst zelf een stap
+                    te zetten voordat je om een hint vraagt.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>WiskundeCoach · Een hulpmiddel bij het leren van wiskunde</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
