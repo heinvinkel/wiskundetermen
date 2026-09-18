@@ -58,8 +58,7 @@ Regels:
 `;
 
                 const response = await env.AI.run(
-                    "@cf/meta/llama-3.1-8b-instruct",
-                    {
+                    "@cf/meta/llama-3.1-8b-instruct-fp8-fast",                    {
                         messages: [
                             {
                                 role: "system",
