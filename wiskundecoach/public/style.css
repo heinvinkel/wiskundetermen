@@ -256,8 +256,13 @@ body {
     border-top: 1px solid #e5e7eb;
 }
 
-#userInput {
+.message-composer {
     flex: 1;
+    min-width: 0;
+}
+
+#userInput {
+    width: 100%;
     resize: none;
     border: 1px solid #d1d5db;
     border-radius: 10px;
@@ -265,6 +270,7 @@ body {
     font-family: inherit;
     font-size: 15px;
     outline: none;
+    display: block;
 }
 
 #userInput:focus {
