@@ -1,149 +1,82 @@
-```javascript
-// ========================================
-// WISKUNDECOACH
-// ========================================
+const chatWindow = document.getElementById("chat-window");
+const userInput = document.getElementById("user-input");
+const sendButton = document.getElementById("send-button");
 
-// Elementen uit de HTML ophalen
-const userInput = document.getElementById("userInput");
-const sendButton = document.getElementById("sendButton");
-const chatMessages = document.getElementById("chatMessages");
-const clearChat = document.getElementById("clearChat");
-const topicButtons = document.querySelectorAll(".topic-button");
-
-
-// ========================================
-// BERICHT TOEVOEGEN
-// ========================================
-
-function addMessage(text, sender) {
-
+function addMessage(text, type) {
     const message = document.createElement("div");
+    message.className = `message ${type}`;
+    message.textContent = text;
 
-    message.classList.add("message", sender);
-
-    const avatar = document.createElement("div");
-    avatar.classList.add("avatar");
-
-    avatar.textContent = sender === "assistant" ? "∑" : "J";
-
-    const content = document.createElement("div");
-    content.classList.add("message-content");
-
-    // Regels netjes weergeven
-    const paragraphs = text.split("\n");
-
-    paragraphs.forEach(paragraph => {
-
-        if (paragraph.trim() !== "") {
-
-            const p = document.createElement("p");
-            p.textContent = paragraph;
-
-            content.appendChild(p);
-        }
-    });
-
-    message.appendChild(avatar);
-    message.appendChild(content);
-
-    chatMessages.appendChild(message);
-
-    // Automatisch naar beneden scrollen
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    chatWindow.appendChild(message);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
-
-// ========================================
-// BERICHT VERSTUREN
-// ========================================
-
-function sendMessage() {
-
+async function sendMessage() {
     const question = userInput.value.trim();
 
-    // Niets versturen als het invoerveld leeg is
-    if (question === "") {
-        return;
-    }
+    if (!question) return;
 
-    // Vraag van leerling toevoegen
+    // Vraag van leerling tonen
     addMessage(question, "user");
 
     // Invoerveld leegmaken
     userInput.value = "";
 
-    // ------------------------------------
-    // TIJDELIJKE AI-REACTIE
-    // ------------------------------------
-    //
-    // Dit vervangen we later door de echte
-    // AI-aanroep via een beveiligde backend.
-    //
+    // Tijdelijk bericht
+    addMessage("Even nadenken...", "bot");
 
-    setTimeout(() => {
+    try {
+        const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                question: question
+            })
+        });
 
-        const response =
-            "Interessante vraag! Welke stap heb je zelf al geprobeerd? " +
-            "Laat zien wat je tot nu toe hebt gedaan, dan help ik je met de volgende stap.";
+        const data = await response.json();
 
-        addMessage(response, "assistant");
+        // Tijdelijk bericht verwijderen
+        const messages = chatWindow.querySelectorAll(".message.bot");
+        const lastMessage = messages[messages.length - 1];
 
-    }, 700);
+        if (lastMessage && lastMessage.textContent === "Even nadenken...") {
+            lastMessage.remove();
+        }
+
+        if (data.answer) {
+            addMessage(data.answer, "bot");
+        } else {
+            addMessage(
+                "Er ging iets mis bij het beantwoorden van je vraag.",
+                "bot"
+            );
+            console.error(data);
+        }
+
+    } catch (error) {
+        console.error(error);
+
+        const messages = chatWindow.querySelectorAll(".message.bot");
+        const lastMessage = messages[messages.length - 1];
+
+        if (lastMessage && lastMessage.textContent === "Even nadenken...") {
+            lastMessage.remove();
+        }
+
+        addMessage(
+            "Ik kan op dit moment geen verbinding maken met de AI.",
+            "bot"
+        );
+    }
 }
-
-
-// ========================================
-// VERSTUREN MET KNOP
-// ========================================
 
 sendButton.addEventListener("click", sendMessage);
 
-
-// ========================================
-// ENTER OM TE VERSTUREN
-// ========================================
-
-userInput.addEventListener("keydown", function(event) {
-
-    // Enter zonder Shift = versturen
-    if (event.key === "Enter" && !event.shiftKey) {
-
-        event.preventDefault();
-
+userInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
         sendMessage();
     }
 });
-
-
-// ========================================
-// NIEUW GESPREK
-// ========================================
-
-clearChat.addEventListener("click", function() {
-
-    chatMessages.innerHTML = "";
-
-    addMessage(
-        "Nieuw gesprek gestart! Waar wil je vandaag mee oefenen?",
-        "assistant"
-    );
-});
-
-
-// ========================================
-// ONDERWERP KIEZEN
-// ========================================
-
-topicButtons.forEach(button => {
-
-    button.addEventListener("click", function() {
-
-        const topic = button.dataset.topic;
-
-        userInput.value =
-            "Ik wil oefenen met " + topic.toLowerCase() + ".";
-
-        userInput.focus();
-    });
-});
-```
