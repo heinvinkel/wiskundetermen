@@ -1,13 +1,18 @@
-const chatWindow = document.getElementById("chat-window");
-const userInput = document.getElementById("user-input");
-const sendButton = document.getElementById("send-button");
+const chatWindow = document.getElementById("chatMessages");
+const userInput = document.getElementById("userInput");
+const sendButton = document.getElementById("sendButton");
 
 function addMessage(text, type) {
     const message = document.createElement("div");
     message.className = `message ${type}`;
-    message.textContent = text;
 
+    const content = document.createElement("div");
+    content.className = "message-content";
+    content.textContent = text;
+
+    message.appendChild(content);
     chatWindow.appendChild(message);
+
     chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
@@ -23,7 +28,7 @@ async function sendMessage() {
     userInput.value = "";
 
     // Tijdelijk bericht
-    addMessage("Even nadenken...", "bot");
+    addMessage("Even nadenken...", "assistant");
 
     try {
         const response = await fetch("/api/chat", {
@@ -39,19 +44,22 @@ async function sendMessage() {
         const data = await response.json();
 
         // Tijdelijk bericht verwijderen
-        const messages = chatWindow.querySelectorAll(".message.bot");
+        const messages = chatWindow.querySelectorAll(".message.assistant");
         const lastMessage = messages[messages.length - 1];
 
-        if (lastMessage && lastMessage.textContent === "Even nadenken...") {
+        if (
+            lastMessage &&
+            lastMessage.textContent.trim() === "Even nadenken..."
+        ) {
             lastMessage.remove();
         }
 
         if (data.answer) {
-            addMessage(data.answer, "bot");
+            addMessage(data.answer, "assistant");
         } else {
             addMessage(
                 "Er ging iets mis bij het beantwoorden van je vraag.",
-                "bot"
+                "assistant"
             );
             console.error(data);
         }
@@ -59,24 +67,31 @@ async function sendMessage() {
     } catch (error) {
         console.error(error);
 
-        const messages = chatWindow.querySelectorAll(".message.bot");
+        const messages = chatWindow.querySelectorAll(".message.assistant");
         const lastMessage = messages[messages.length - 1];
 
-        if (lastMessage && lastMessage.textContent === "Even nadenken...") {
+        if (
+            lastMessage &&
+            lastMessage.textContent.trim() === "Even nadenken..."
+        ) {
             lastMessage.remove();
         }
 
         addMessage(
             "Ik kan op dit moment geen verbinding maken met de AI.",
-            "bot"
+            "assistant"
         );
     }
 }
 
+// Versturen met de knop
 sendButton.addEventListener("click", sendMessage);
 
+// Enter = versturen
+// Shift + Enter = nieuwe regel
 userInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
         sendMessage();
     }
 });
