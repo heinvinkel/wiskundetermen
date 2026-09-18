@@ -87,6 +87,19 @@ userInput.addEventListener("paste", (event) => {
 });
 
 
+// Bestand omzetten naar Base64
+async function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+
+        reader.readAsDataURL(file);
+    });
+}
+
+
 // Bericht versturen
 async function sendMessage() {
     const question = userInput.value.trim();
@@ -96,11 +109,32 @@ async function sendMessage() {
         return;
     }
 
-    // Afbeelding lokaal tonen
+    // Bewaar de afbeelding voordat we de invoer leegmaken
+    const imageFile = pastedImage;
+
+    // Maak lokaal een URL voor de afbeelding
     let imageUrl = null;
 
-    if (pastedImage) {
-        imageUrl = URL.createObjectURL(pastedImage);
+    if (imageFile) {
+        imageUrl = URL.createObjectURL(imageFile);
+    }
+
+    // Afbeelding omzetten naar Base64
+    let imageBase64 = null;
+
+    if (imageFile) {
+        try {
+            imageBase64 = await fileToBase64(imageFile);
+        } catch (error) {
+            console.error(error);
+
+            addMessage(
+                "Het lukte niet om de afbeelding te verwerken.",
+                "assistant"
+            );
+
+            return;
+        }
     }
 
     // Bericht van leerling tonen
@@ -121,7 +155,8 @@ async function sendMessage() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                question: question
+                question: question,
+                image: imageBase64
             })
         });
 
