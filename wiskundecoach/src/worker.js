@@ -21,12 +21,15 @@ export default {
         if (url.pathname === "/api/chat" && request.method === "POST") {
             try {
                 const body = await request.json();
-                const question = body.question;
 
-                if (!question) {
+                const question = body.question || "";
+                const image = body.image || null;
+
+                // Er moet minimaal tekst of een afbeelding zijn
+                if (!question && !image) {
                     return new Response(
                         JSON.stringify({
-                            error: "Geen vraag ontvangen."
+                            error: "Geen vraag of afbeelding ontvangen."
                         }),
                         {
                             status: 400,
@@ -37,7 +40,7 @@ export default {
                     );
                 }
 
- const systemPrompt = `
+                const systemPrompt = `
 Je bent WiskundeCoach, een vriendelijke Nederlandse AI-wiskundecoach
 voor leerlingen van de middelbare school.
 
@@ -146,6 +149,21 @@ ALS DE LEERLING EEN NIEUWE OPGAVE KRIJGT
 - Controleer de tussenstappen.
 - Bouw de ondersteuning geleidelijk op.
 
+AFBEELDINGEN
+Als de leerling een afbeelding meestuurt:
+
+- Bekijk de afbeelding zorgvuldig.
+- Lees de wiskundeopgave, getallen, formules en eventuele uitwerking.
+- Gebruik ook de tekst die de leerling bij de afbeelding heeft geschreven.
+- Behandel de afbeelding en de tekst als één vraag.
+- Als de afbeelding een opgave bevat, help dan met die specifieke opgave.
+- Als de afbeelding een uitwerking van de leerling bevat, controleer dan
+  de gemaakte stappen.
+- Als iets op de afbeelding niet goed leesbaar is, zeg dat eerlijk.
+- Verzin geen getallen, symbolen of tekst die je niet goed kunt lezen.
+- Geef ook bij een afbeelding niet meteen de volledige oplossing.
+- Volg dezelfde stap-voor-stap werkwijze als bij een gewone tekstvraag.
+
 TAAL
 - Schrijf in begrijpelijk Nederlands.
 - Gebruik Nederlandse wiskundetermen.
@@ -161,20 +179,57 @@ maar dat de leerling leert hoe hij soortgelijke problemen zelfstandig
 kan oplossen.
 `;
 
-                const response = await env.AI.run(
-                    "@cf/meta/llama-3.1-8b-instruct-fp8-fast",                    {
-                        messages: [
-                            {
-                                role: "system",
-                                content: systemPrompt
-                            },
-                            {
-                                role: "user",
-                                content: question
-                            }
-                        ]
-                    }
-                );
+                let response;
+
+                /*
+                 * ZONDER AFBEELDING
+                 *
+                 * We blijven het huidige snelle tekstmodel gebruiken.
+                 */
+                if (!image) {
+
+                    response = await env.AI.run(
+                        "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
+                        {
+                            messages: [
+                                {
+                                    role: "system",
+                                    content: systemPrompt
+                                },
+                                {
+                                    role: "user",
+                                    content: question
+                                }
+                            ]
+                        }
+                    );
+
+                /*
+                 * MET AFBEELDING
+                 *
+                 * We gebruiken het vision-model.
+                 * De afbeelding wordt door script.js als Data URL/base64
+                 * naar deze Worker gestuurd.
+                 */
+                } else {
+
+                    response = await env.AI.run(
+                        "@cf/meta/llama-3.2-11b-vision-instruct",
+                        {
+                            messages: [
+                                {
+                                    role: "system",
+                                    content: systemPrompt
+                                },
+                                {
+                                    role: "user",
+                                    content: question || "Bekijk deze afbeelding en help mij met de wiskundeopgave."
+                                }
+                            ],
+                            image: image
+                        }
+                    );
+                }
 
                 return new Response(
                     JSON.stringify({
@@ -188,9 +243,11 @@ kan oplossen.
                 );
 
             } catch (error) {
+                console.error(error);
+
                 return new Response(
                     JSON.stringify({
-                        error: "Er ging iets mis met de AI.",
+                        error: "Er ging iets mis bij de AI.",
                         details: error.message
                     }),
                     {
