@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eén hart voor Vinkel</title>
+<!--
+  ============================================================================
+  Eén hart voor Vinkel – presentatie
+  Bediening:  → / spatie / Enter / klik = volgende stap
+              ← / Backspace / rechtsklik  = vorige slide
+              R = animatie huidige slide opnieuw     F = volledig scherm
+              Home / End = eerste / laatste slide
+  Dit bestand is gegenereerd door bouw.ps1 uit sjabloon.html.
+  Bewerk sjabloon.html en draai bouw.ps1 opnieuw.
+  ============================================================================
+-->
+<style>
+:root{
+  --groen:#3e5b37; --groen-l:#8fae6a; --groen-ll:#cfdcb5;
+  --steen:#a4513a; --steen-d:#7c3a28;
+  --zand:#efe4cf; --zand-d:#d9c8a7;
+  --inkt:#1f251c; --wit:#fffaf0;
+  --accent:#ffcc33;              /* heldere accentkleur: lijnen & markeringen */
+  --ph:#fff04a;                  /* markering placeholders */
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#12160f;overflow:hidden;color:var(--wit);font-family:var(--sans)}
+body{cursor:pointer;user-select:none;-webkit-user-select:none}
+#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;margin:-450px 0 0 -800px;overflow:hidden;background:#1b2117;transform-origin:50% 50%}
+
+/* ---------- slides ---------- */
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s linear .7s;overflow:hidden}
+.slide.on{opacity:1;visibility:visible;transition:opacity .7s ease,visibility 0s}
+.fill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.dim{position:absolute;inset:0;pointer-events:none}
+.noanim, .noanim *{transition:none!important;animation:none!important}
+
+.kicker{position:absolute;left:80px;top:62px;font:600 18px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--accent);text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.kicker::before{content:"";display:inline-block;width:34px;height:3px;background:var(--accent);vertical-align:middle;margin-right:14px;border-radius:2px}
+h1,h2{font-family:var(--serif);font-weight:normal;margin:0;letter-spacing:-.01em}
+.shadowtxt{text-shadow:0 2px 24px rgba(0,0,0,.55),0 1px 3px rgba(0,0,0,.5)}
+.ph{background:var(--ph);color:#1a1a1a;padding:0 .25em;border-radius:4px;box-shadow:0 0 0 2px rgba(0,0,0,.15);text-shadow:none;font-style:normal;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.credit{position:absolute;right:18px;bottom:16px;font:12px/1 var(--sans);color:rgba(255,255,255,.82);background:rgba(0,0,0,.35);padding:4px 7px;border-radius:4px;z-index:5;pointer-events:none}
+.note{position:absolute;font:italic 17px/1.3 var(--serif);color:rgba(255,250,240,.9)}
+
+/* reveal helper: verschijnt bij stap n */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+
+/* ---------- 1 opening ---------- */
+#s1 .kb{animation:kb 26s ease-in-out infinite alternate;transform-origin:62% 52%}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.14) translate(-1%,-1%)}}
+#s1 .dim{background:radial-gradient(ellipse at 50% 55%,rgba(20,26,17,.35),rgba(20,26,17,.82) 75%),linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.45))}
+#s1 .title{position:absolute;left:0;right:0;top:300px;text-align:center}
+#s1 h1{font-size:112px;line-height:1.02;animation:up 1.6s cubic-bezier(.2,.7,.2,1) both .3s}
+#s1 .sub{margin-top:28px;font:300 32px/1.3 var(--sans);color:var(--zand);animation:up 1.6s cubic-bezier(.2,.7,.2,1) both .9s}
+#s1 .line{width:120px;height:4px;background:var(--accent);margin:34px auto 0;border-radius:3px;animation:grow 1.4s ease both 1.5s}
+#s1 .hint{position:absolute;bottom:44px;left:0;right:0;text-align:center;font:15px var(--sans);color:rgba(255,250,240,.6);animation:up 1s ease both 2.6s}
+@keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ---------- 2 pins ---------- */
+#s2 .dim{background:linear-gradient(90deg,rgba(18,22,15,.55),rgba(18,22,15,0) 45%),linear-gradient(0deg,rgba(18,22,15,.6),rgba(18,22,15,0) 30%)}
+.pin{position:absolute;width:0;height:0;opacity:0}
+.pin .mk{position:absolute;left:-17px;top:-46px;width:34px;height:46px}
+.pin .lb{position:absolute;top:-62px;white-space:nowrap;font:600 17px/1 var(--sans);color:var(--inkt);background:var(--wit);padding:8px 12px;border-radius:20px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.pin.r .lb{left:22px}.pin.l .lb{right:22px}
+.pin.d .lb{top:-12px}
+.pin .lb.ph{background:var(--ph)}
+.st1 .pin{animation:pinIn .75s cubic-bezier(.3,1.7,.5,1) both;animation-delay:calc(var(--i) * .38s)}
+@keyframes pinIn{0%{opacity:0;transform:translateY(-70px) scale(.6)}60%{opacity:1}100%{opacity:1;transform:none}}
+#s2 .msg{position:absolute;left:80px;bottom:90px;width:720px;font:52px/1.15 var(--serif)}
+.st1 #s2msg{opacity:1;transform:none;transition-delay:2.7s}
+
+/* ---------- 3 zoom ---------- */
+.zoomwrap{position:absolute;left:0;top:0;width:1600px;height:900px;transform-origin:0 0;transition:transform 2.5s cubic-bezier(.65,0,.3,1)}
+.zoomwrap .bimg{position:absolute;opacity:0;transition:opacity 1.6s ease .75s}
+.st1 .zoomwrap{transform:var(--zoomT)}
+.st1 .zoomwrap .bimg{opacity:1}
+#s3 .msg{position:absolute;left:80px;bottom:80px;font:58px/1.1 var(--serif)}
+.st1 #s3msg{opacity:1;transform:none;transition-delay:2.5s}
+
+/* ---------- 4 perceel ---------- */
+svg.over{position:absolute;inset:0;width:1600px;height:900px;overflow:visible}
+.grens{fill:none;stroke:var(--accent);stroke-width:5;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(0,0,0,.6))}
+.grensvul{fill:var(--accent);opacity:0;transition:opacity 1.2s ease}
+.draw{transition:stroke-dashoffset 3s cubic-bezier(.45,.05,.35,1)}
+.st1 .draw{stroke-dashoffset:0!important}
+.st1 .grensvul{opacity:.2;transition-delay:3s}
+#s4 .dim{background:linear-gradient(180deg,rgba(18,22,15,.45),rgba(18,22,15,0) 22%)}
+#s4 .label{position:absolute;left:1090px;top:640px;width:470px;padding:22px 26px;background:rgba(255,250,240,.95);color:var(--inkt);border-radius:16px;border-left:8px solid var(--accent);box-shadow:0 10px 40px rgba(0,0,0,.4)}
+#s4 .label b{display:block;font:44px/1.05 var(--serif)}
+#s4 .label span{display:block;margin-top:8px;font:22px/1.3 var(--sans);color:#4a4a40}
+.st1 #s4lab{opacity:1;transform:none;transition-delay:3.4s}
+
+/* ---------- 5 argumenten ---------- */
+#s5{background:var(--zand);color:var(--inkt)}
+#s5 .kicker{color:var(--steen);text-shadow:none}#s5 .kicker::before{background:var(--steen)}
+#s5 h2{position:absolute;left:80px;top:104px;font-size:66px;color:var(--groen)}
+#s5 .card{position:absolute;left:80px;top:250px;width:760px;height:427.5px;border-radius:18px;overflow:hidden;box-shadow:0 18px 50px rgba(60,40,20,.28)}
+#s5 .card img,#s5 .card svg{position:absolute;inset:0;width:100%;height:100%}
+#s5 .card .credit{bottom:8px;right:8px;font-size:10px}
+#s5 ul{position:absolute;left:900px;top:190px;width:640px;margin:0;padding:0;list-style:none}
+#s5 li{position:relative;padding:0 0 0 70px;margin:0 0 24px;opacity:0;transform:translateX(70px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+#s5 li .n{position:absolute;left:0;top:2px;width:48px;height:48px;border-radius:50%;background:var(--groen);color:var(--wit);font:600 22px/48px var(--sans);text-align:center}
+#s5 li b{display:block;font:30px/1.15 var(--serif);color:var(--steen-d)}
+#s5 li > span{display:block;font:20px/1.35 var(--sans);color:#3c3f34;margin-top:4px}
+#s5.st1 li:nth-child(1),#s5.st2 li:nth-child(2),#s5.st3 li:nth-child(3),#s5.st4 li:nth-child(4),#s5.st5 li:nth-child(5){opacity:1;transform:none}
+
+/* ---------- 6 concept ---------- */
+#s6 .dim{background:rgba(20,26,17,.32)}
+.zone{opacity:0;transform:scale(.86);transform-box:fill-box;transform-origin:center;transition:opacity .9s ease,transform 1s cubic-bezier(.3,1.4,.5,1)}
+.zone polygon{stroke-linejoin:round;stroke-width:16}
+.chip{position:absolute;display:flex;align-items:center;gap:12px;padding:9px 18px 9px 9px;background:rgba(255,250,240,.96);color:var(--inkt);border-radius:40px;font:600 19px/1.2 var(--sans);box-shadow:0 6px 22px rgba(0,0,0,.35);opacity:0;transform:translateY(12px);transition:opacity .7s ease .35s,transform .7s ease .35s;max-width:390px}
+.chip i{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center}
+.chip i svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#s6.st1 .z1,#s6.st2 .z2,#s6.st3 .z3,#s6.st4 .z4,#s6.st5 .z5,#s6.st6 .z6{opacity:1;transform:none}
+.route-draw{transition:stroke-dashoffset 3.2s cubic-bezier(.45,.05,.35,1)}
+#s6.st6 .route-draw{stroke-dashoffset:0!important}
+#s6 .title{position:absolute;left:80px;top:100px;font:54px/1.1 var(--serif)}
+#s6 .note{left:80px;bottom:40px}
+
+/* ---------- 7 drone ---------- */
+.drone{position:absolute;inset:0;transform-origin:var(--dx) var(--dy);transition:transform 2.6s cubic-bezier(.6,0,.35,1),filter 2.6s ease}
+.st1 .drone{transform:perspective(620px) rotateX(64deg) scale(3.4);filter:blur(2px) brightness(1.08)}
+#s7 .dlayer{opacity:0;transform:scale(1.18);transition:opacity 1.3s ease 1.25s,transform 2.2s cubic-bezier(.2,.7,.2,1) 1.1s}
+#s7.st1 .dlayer{opacity:1;transform:none}
+#s7 .tag{position:absolute;left:80px;bottom:56px;font:600 20px/1 var(--sans);letter-spacing:.06em;background:rgba(20,26,17,.65);padding:12px 18px;border-radius:30px;border-left:5px solid var(--accent)}
+.st1 #s7tag{opacity:1;transform:none;transition-delay:2.6s}
+
+/* zachte band onderin Street View: verbergt de vage onderrand van het beeld */
+.svfade{position:absolute;left:0;right:0;bottom:0;height:42%;pointer-events:none;background:linear-gradient(180deg,rgba(24,28,21,0) 0%,rgba(24,28,21,.55) 38%,rgba(24,28,21,.92) 72%,rgba(24,28,21,.97) 100%)}
+/* ---------- 8 oud -> nieuw ---------- */
+#s8 canvas{position:absolute;inset:0;width:1600px;height:900px}
+/* het nieuwe gebouw ontstaat uit de stof: zachte onthulling van onder naar boven,
+   van wazig/stoffig naar scherp, terwijl de stofwolk eroverheen nog wegtrekt */
+@property --rp{syntax:'<percentage>';inherits:false;initial-value:0%}
+#s8 .rise{--rp:0%;opacity:0;filter:blur(16px) brightness(1.3) sepia(.35);transform:translateY(30px) scale(1.02);
+  -webkit-mask-image:linear-gradient(0deg,#000 calc(var(--rp) - 30%),transparent var(--rp));mask-image:linear-gradient(0deg,#000 calc(var(--rp) - 30%),transparent var(--rp));
+  transition:--rp 3s cubic-bezier(.4,0,.2,1),opacity 1.4s ease,filter 3.2s cubic-bezier(.3,0,.2,1),transform 3s cubic-bezier(.2,.7,.2,1)}
+#s8.st2 .rise{--rp:135%;opacity:1;filter:none;transform:none}
+#s8 .glow{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse 50% 32% at 60% 34%,rgba(255,236,170,.75),rgba(255,236,170,0) 70%);mix-blend-mode:screen}
+#s8.st2 .glow{animation:glow 3.6s ease 1.4s both}
+@keyframes glow{0%{opacity:0}50%{opacity:.35}100%{opacity:.1}}
+#s8 .msg{position:absolute;left:0;right:0;bottom:70px;text-align:center;font:62px/1.1 var(--serif)}
+#s8 .msg::before{content:"";position:absolute;left:0;right:0;bottom:-70px;height:260px;background:linear-gradient(0deg,rgba(18,22,15,.75),rgba(18,22,15,0));z-index:-1}
+#s8.st2 #s8msg{opacity:1;transform:none;transition-delay:2.9s}
+#s8 .tag{position:absolute;left:80px;top:60px;font:600 18px/1 var(--sans);background:rgba(20,26,17,.6);padding:10px 16px;border-radius:30px;transition:opacity .6s}
+#s8.st2 .tag.oud{opacity:0}
+#s8 .tag.nieuw{opacity:0}
+#s8.st2 .tag.nieuw{opacity:1;transition-delay:2.6s}
+
+/* ---------- 9 opbrengst ---------- */
+#s9 .bg{filter:blur(6px) saturate(.8);transform:scale(1.06)}
+#s9 .dim{background:linear-gradient(180deg,rgba(239,228,207,.93),rgba(239,228,207,.97))}
+#s9{color:var(--inkt)}
+#s9 .kicker{color:var(--steen);text-shadow:none}#s9 .kicker::before{background:var(--steen)}
+#s9 h2{position:absolute;left:80px;top:104px;font-size:66px;color:var(--groen)}
+#s9 .cols{position:absolute;left:80px;right:80px;top:290px;display:flex;gap:50px}
+#s9 .col{flex:1;text-align:center;opacity:0;transform:translateY(40px) scale(.96);transition:opacity .9s ease,transform 1s cubic-bezier(.3,1.4,.5,1)}
+#s9 .ic{width:190px;height:190px;margin:0 auto 30px;border-radius:50%;display:grid;place-items:center;box-shadow:0 14px 40px rgba(60,40,20,.25)}
+#s9 .ic svg{width:104px;height:104px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+#s9 .col b{display:block;font:40px/1.1 var(--serif);color:var(--steen-d)}
+#s9 .col span{display:block;margin-top:12px;font:23px/1.35 var(--sans);color:#3c3f34}
+#s9.st1 .col:nth-child(1),#s9.st2 .col:nth-child(2),#s9.st3 .col:nth-child(3){opacity:1;transform:none}
+#s9 .foot{position:absolute;left:0;right:0;bottom:70px;text-align:center;font:19px var(--sans);color:#5a5a4c}
+
+/* ---------- 10 afsluiting ---------- */
+#s10 .kb{animation:kb 30s ease-in-out infinite alternate;transform-origin:60% 55%}
+#s10 .dim{background:radial-gradient(ellipse at 60% 55%,rgba(20,26,17,.45),rgba(20,26,17,.88) 70%)}
+#s10 .grens{stroke-width:3.5}
+#s10.st1 .grenswrap{animation:pulse 3.2s ease-in-out 3s infinite}
+@keyframes pulse{0%,100%{filter:drop-shadow(0 0 4px rgba(255,204,51,.5))}50%{filter:drop-shadow(0 0 18px rgba(255,204,51,1))}}
+#s10 .draw{transition-duration:2.6s}
+#s10 .title{position:absolute;left:0;right:0;top:120px;text-align:center}
+#s10 h1{font-size:96px;line-height:1.05}
+#s10 .meta{margin-top:470px;font:26px/1.6 var(--sans);color:var(--zand)}
+#s10.st2 #s10t{opacity:1;transform:none}
+
+/* ---------- voortgang ---------- */
+#prog{position:absolute;left:80px;right:80px;bottom:0;height:34px;display:flex;align-items:center;gap:8px;z-index:20;pointer-events:none}
+#prog .seg{flex:1;height:4px;border-radius:3px;background:rgba(255,255,255,.22);overflow:hidden}
+#prog .seg i{display:block;height:100%;width:0;background:var(--accent);transition:width .5s ease}
+#prog.light .seg{background:rgba(31,37,28,.15)}
+#prog.light .seg i{background:var(--steen)}
+#cnt{position:absolute;right:20px;bottom:10px;font:12px var(--sans);color:rgba(255,255,255,.5);z-index:20}
+#cnt.light{color:rgba(31,37,28,.45)}
+#fsbtn{position:fixed;right:14px;top:12px;z-index:50;font:13px var(--sans);color:#fff;background:rgba(0,0,0,.45);border:0;border-radius:6px;padding:7px 11px;cursor:pointer;opacity:.0;transition:opacity .3s}
+body:hover #fsbtn{opacity:.75}
+</style>
+</head>
+<body>
+<button id="fsbtn" title="Volledig scherm (F)">⛶ Volledig scherm</button>
+<div id="stage">
+
+<!-- 1 · OPENING -->
+<section class="slide" id="s1">
+  <img class="fill kb" data-img="A" alt="">
+  <div class="dim"></div>
+  <div class="title shadowtxt">
+    <h1>Eén hart voor Vinkel</h1>
+    <div class="sub">Voorstel voor school, kindcentrum en ’t Zijl op één plek</div>
+    <div class="line"></div>
+  </div>
+  <div class="hint">klik of → om verder te gaan · F voor volledig scherm · R herhaalt de animatie</div>
+  <div class="credit" data-credit="A"></div>
+</section>
+
+<!-- 2 · VINKEL VAN BOVEN -->
+<section class="slide" id="s2">
+  <img class="fill" data-img="A" alt="">
+  <div class="dim"></div>
+  <div class="kicker">Vinkel van boven</div>
+  <div id="pins"></div>
+  <div class="msg rv shadowtxt" id="s2msg">Alles wat Vinkel samenbrengt, ligt hier al dicht bij elkaar.</div>
+  <div class="credit" data-credit="A"></div>
+</section>
+
+<!-- 3 · INZOOMEN -->
+<section class="slide" id="s3">
+  <div class="zoomwrap">
+    <img class="fill" data-img="A" alt="">
+    <img class="bimg" data-img="B" alt="">
+  </div>
+  <div class="kicker">Inzoomen op de plek</div>
+  <div class="msg rv shadowtxt" id="s3msg">Hier, aan de Lindenlaan.</div>
+  <div class="credit" data-credit="A"></div>
+</section>
+
+<!-- 4 · HET PERCEEL -->
+<section class="slide" id="s4">
+  <img class="fill" data-img="B" alt="">
+  <div class="dim"></div>
+  <svg class="over" viewBox="0 0 1600 900">
+    <polygon class="grensvul" data-grens="B"/>
+    <polygon class="grens draw" data-grens="B"/>
+  </svg>
+  <div class="kicker">Het perceel</div>
+  <div class="label rv" id="s4lab"><b>± 20.000 m² (2 ha)</b><span>grond van de gemeente</span></div>
+  <div class="credit" data-credit="B"></div>
+</section>
+
+<!-- 5 · WAAROM HIER -->
+<section class="slide" id="s5">
+  <div class="kicker">Waarom hier?</div>
+  <h2>Vijf redenen voor de Lindenlaan</h2>
+  <div class="card">
+    <img data-img="B" alt="">
+    <svg viewBox="0 0 1600 900"><polygon class="grens" data-grens="B" style="stroke-width:9;fill:rgba(255,204,51,.18)"/></svg>
+    <div class="credit" data-credit="B"></div>
+  </div>
+  <ul>
+    <li><div class="n">1</div><b>Centraal</b><span>Aan de Lindenlaan, op loopafstand van kerk, horeca en <span class="ph">[X]</span> woningen.</span></li>
+    <li><div class="n">2</div><b>Gemeentegrond</b><span>Geen aankoop van grond nodig, dus sneller te realiseren.</span></li>
+    <li><div class="n">3</div><b>Ruimte</b><span>2 ha biedt plek voor gebouw, schoolplein, groen, parkeren en een veilige haal-en-brengzone.</span></li>
+    <li><div class="n">4</div><b>Samen met sport</b><span>Sports Field, tennis en Jeugdsoos liggen er al. Samen één plek voor jong en oud.</span></li>
+    <li><div class="n">5</div><b><span class="ph">[eigen argument]</span></b><span><span class="ph">[bijv. verkeersveiligheid / fietsroutes / leegstand pand Lindenlaan 12]</span></span></li>
+  </ul>
+</section>
+
+<!-- 6 · CONCEPT -->
+<section class="slide" id="s6">
+  <img class="fill" data-img="B" alt="">
+  <div class="dim"></div>
+  <svg class="over" viewBox="0 0 1600 900" id="zones">
+    <defs>
+      <filter id="zs" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity=".35"/></filter>
+      <mask id="routeMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900">
+        <path class="route-draw" id="routeMaskPath" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+      </mask>
+    </defs>
+    <polygon class="grens" data-grens="B" style="stroke-width:2.5;stroke-dasharray:2 8;opacity:.8"/>
+  </svg>
+  <div id="chips"></div>
+  <div class="kicker">Concept</div>
+  <div class="title shadowtxt">De nieuwe kern</div>
+  <div class="note shadowtxt">Schetsmatig en indicatief</div>
+  <div class="credit" data-credit="B"></div>
+</section>
+
+<!-- 7 · DRONEVLUCHT -->
+<section class="slide" id="s7" style="perspective:none">
+  <div class="drone"><img class="fill" data-img="B" alt=""></div>
+  <div class="dlayer fill"><img class="fill" data-img="D" alt=""><div class="svfade"></div></div>
+  <div class="tag rv" id="s7tag">Lindenlaan 12 – vandaag</div>
+  <div class="credit" id="s7credit" data-credit="B"></div>
+</section>
+
+<!-- 8 · VAN OUD NAAR NIEUW -->
+<section class="slide" id="s8">
+  <img class="fill" data-img="D" id="s8d" alt="">
+  <canvas id="s8bg" width="1920" height="1080" style="opacity:0"></canvas>
+  <canvas id="s8new" width="1920" height="1080"></canvas>
+  <img data-img="E" id="s8e" alt="" hidden>
+  <div class="svfade"></div>
+  <canvas id="s8fx" width="1920" height="1080"></canvas>
+  <div class="glow"></div>
+  <div class="tag oud">Lindenlaan 12 – vandaag</div>
+  <div class="tag nieuw">Impressie – indicatief</div>
+  <div class="msg rv shadowtxt" id="s8msg">’t Zijl – het nieuwe hart van Vinkel</div>
+  <div class="credit" data-credit="D" id="s8credit"></div>
+</section>
+
+<!-- 9 · WAT HET OPLEVERT -->
+<section class="slide" id="s9">
+  <img class="fill bg" data-img="E2" alt="">
+  <div class="dim"></div>
+  <div class="kicker">Wat het Vinkel oplevert</div>
+  <h2>Eén plek, voor iedereen</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="ic" style="background:var(--steen)"><svg viewBox="0 0 48 48"><circle cx="17" cy="13" r="5"/><circle cx="32" cy="17" r="4"/><path d="M8 40v-9a9 9 0 0 1 18 0v9M25 40v-7a7 7 0 0 1 14 0v7"/><path d="M4 24 24 6l20 18" opacity=".55"/></svg></div>
+      <b>Kinderen</b><span>School en opvang onder één dak</span>
+    </div>
+    <div class="col">
+      <div class="ic" style="background:var(--groen)"><svg viewBox="0 0 48 48"><circle cx="12" cy="15" r="4.5"/><circle cx="24" cy="12" r="5"/><circle cx="36" cy="15" r="4.5"/><path d="M4 36v-5a8 8 0 0 1 14-5M44 36v-5a8 8 0 0 0-14-5M15 40v-7a9 9 0 0 1 18 0v7"/></svg></div>
+      <b>Verenigingen</b><span>Ruimte om samen te komen</span>
+    </div>
+    <div class="col">
+      <div class="ic" style="background:#c08a3e"><svg viewBox="0 0 48 48"><path d="M24 41s-14-8.5-14-19a8 8 0 0 1 14-5.3A8 8 0 0 1 38 22c0 10.5-14 19-14 19z"/><path d="M17 25h14M24 18v14" opacity=".6"/></svg></div>
+      <b>Dorp</b><span>Een levendige kern waar je elkaar tegenkomt</span>
+    </div>
+  </div>
+  <div class="foot"><span class="ph">[aantal kinderen / verenigingen / gebruikers]</span></div>
+</section>
+
+<!-- 10 · AFSLUITING -->
+<section class="slide" id="s10">
+  <div class="fill kb">
+    <img class="fill" data-img="A" alt="">
+    <svg class="over grenswrap" viewBox="0 0 1600 900"><polygon class="grensvul" data-grens="A"/><polygon class="grens draw" data-grens="A"/></svg>
+  </div>
+  <div class="dim"></div>
+  <div class="title rv shadowtxt" id="s10t">
+    <h1>Eén plek. Eén hart. Vinkel.</h1>
+    <div class="meta"><span class="ph">[naam / contact]</span><br><span class="ph">[vraag aan het publiek, bijv. “Steunt u dit voorstel?”]</span></div>
+  </div>
+  <div class="credit" data-credit="A"></div>
+</section>
+
+<div id="prog"></div>
+<div id="cnt"></div>
+</div>
+
+<script>
+/* ===========================================================================
+   BEELDEN (base64, ingevuld door bouw.ps1)
+   =========================================================================== */
+const IMG = {
+  A:  "__IMG_A__",
+  B:  "__IMG_B__",
+  D:  "__IMG_D__",
+  E:  "__IMG_E__",
+  E2: "__IMG_E2__"
+};
+const BRON = { A:"__BRON_A__", B:"__BRON_B__", D:"__BRON_D__" };
+
+/* ===========================================================================
+   PERCEELGRENS  –  coördinaten op beeld [B] (ingezoomd), schaal 1600 × 900
+   ---------------------------------------------------------------------------
+   Overgenomen van de zwarte lijnen op de papieren kaart [C] (afbeelding1.jpeg).
+   Afgestemd op de PDOK-luchtfoto in bronnen\luchtfoto-perceel-pdok.jpg
+   (RD-centrum 160385 / 412915, breedte 520 m). Vervang je [B] door een eigen
+   ingezoomd.png met een andere uitsnede, stel deze punten dan bij.
+   Volgorde (met de klok mee, start bij de Lindenlaan, noordpunt Carteam-pand):
+     0-4   voorzijde langs de Lindenlaan (pand Lindenlaan 12)
+     5-8   oostgrens langs bomenrij/sloot, vóór de stallen
+     9-12  zuidgrens achter de tennisbanen
+     13-17 westzijde tennis, Sports Field, langs het voetpad
+     18-22 gebouw Stichting Jeugdsoos Vinkel (binnen de grens)
+     23-25 zuidrand erf met containers en oostgevel Carteam-pand (buiten de grens)
+   =========================================================================== */
+const GRENS_B = [
+  [692,216],[750,190],[808,163],[861,137],[918,123],        // Lindenlaan
+  [947,212],[1000,471],[1038,587],[1060,721],               // oost: bomenrij/sloot
+  [998,740],[885,769],[784,810],[758,817],                  // zuid: achter tennis
+  [723,625],[716,606],[665,606],[630,548],[601,510],        // west: tennis, Sports Field, pad
+  [563,548],[505,546],[508,447],[558,447],[569,471],        // Jeugdsoos
+  [788,399],[750,279],[707,223]                             // erf + Carteam (buiten)
+];
+
+/* Waar ligt beeld [B] binnen beeld [A]? (in A-coördinaten, 1600 × 900)
+   Nodig voor de zoom op slide 3 en de grens op slide 10.               */
+const UITSNEDE_B_IN_A = { x:646.15, y:313.08, w:640, h:360 };
+
+/* Pins op beeld [A] (1600 × 900). side: r = label rechts, l = links.
+   'ph' = placeholder (geel). Posities met * graag controleren.          */
+const PINS = [
+  { x:747, y:470, t:"Onze Lieve Vrouw van de Rozenkranskerk", side:"l" },   // * kerk naast begraafplaats
+  { x:849, y:429, t:"Danny’s Eeterij", side:"l" },                          // Lindenlaan 20
+  { x:860, y:512, t:"Jeugdsoos", side:"l", d:1 },
+  { x:985, y:594, t:"Tennisclub Vinkel", side:"r", d:1 },
+  { x:567, y:400, t:"[huidige school]", side:"l", ph:1 },                   // * positie bijstellen
+  { x:520, y:300, t:"[huidig ’t Zijl]", side:"l", ph:1 }                    // * positie bijstellen
+];
+
+/* Concept-zones op [B] (slide 6) – schetsmatig
+   Overgenomen uit de schets van de gebruiker (Google-luchtfoto met vlakken),
+   omgerekend naar beeld [B]. Volgorde = volgorde van verschijnen per klik.   */
+const ZONES = [
+  { k:"z1", kleur:"#b5563c", pts:[[718,202],[869,137],[903,228],[757,288]],               // ’t Zijl, aan de Lindenlaan
+    chip:[{x:950,y:120,t:"’t Zijl – dorpshuis",ic:"huis"}] },
+  { k:"z2", kleur:"#4f8a8b", pts:[[795,271],[879,240],[924,346],[842,381]],               // sporthal
+    chip:[{x:1000,y:262,t:"Sporthal",ic:"bal"}] },
+  { k:"z3", kleur:"#d9a441", pts:[[860,431],[993,387],[1031,491],[898,536]],              // school + kindcentrum
+    chip:[{x:1070,y:420,t:"School en kindcentrum",ic:"school"}] },
+  { k:"z4", kleur:"#8a7f9e", pts:[[721,313],[774,291],[818,391],[761,407]],               // parkeren noord
+    pts2:[[854,585],[1041,543],[1060,654],[871,697]],                                       // parkeren zuid
+    chip:[{x:520,y:330,t:"Parkeren",ic:"p"},{x:1095,y:610,t:"Parkeren",ic:"p"}] },
+];
+/* Wegen (ontsluiting) op [B] – lijnen */
+const WEG = [
+  [[715,210],[746,301]],                 // langs ’t Zijl, west
+  [[877,113],[964,332],[524,492]],       // vanaf Lindenlaan oost, dwars naar de Jeugdsoos
+  [[804,420],[847,635]]                  // aftakking zuid naar parkeren
+];
+const WEG_CHIP = {x:280,y:470,t:"Ontsluitingsweg",ic:"weg",kleur:"#55585c"};
+const ROUTE = [[540,525],[640,535],[720,560],[775,610],[830,575],[870,555],[840,470],[805,425],[780,395]];
+const ROUTE_CHIP = {x:280,y:590,t:"Groene wandelroute verbindt alles",ic:"pad",kleur:"#5b8f3c"};
+
+/* Lindenlaan 12 op [B] – doel van de dronevlucht (slide 7) */
+const DRONE_DOEL = { x:837, y:205 };
+
+/* Pand op Street View [D] dat afbrokkelt (fracties van breedte/hoogte).
+   Plein en bomen buiten dit vlak blijven staan.                         */
+const PAND_D = [[.157,.337],[.322,.332],[.614,.271],[.982,.088],[.982,.588],[.614,.532],[.434,.511],[.160,.476]];
+
+/* Het nieuwe gebouw in de impressie [E] (fracties van [E]) – alleen dit deel wordt
+   uitgeknipt en op de plek van het oude pand gezet; de rest van de foto blijft [D].   */
+const NIEUW_E = [[.25,.38],[.35,.365],[.378,.33],[.85,.175],[.873,.172],[.917,.29],[.917,.552],[.70,.542],[.35,.512],[.25,.512]];
+/* Plaatsing van [E] op [D]:  x_D = dx + x_E * sx ,  y_D = dy + y_E * sy
+   (bounding box van het nieuwe gebouw -> bounding box van PAND_D)                     */
+const E_NAAR_D = { sx:1.237, sy:1.211, dx:-0.152, dy:-0.120 };
+/* De stoep/het plein voor het gebouw (fracties van [D]): loopt langs de stoeprand
+   van de echte foto, zodat de weg (Lindenlaan) van [D] blijft staan.                */
+const STOEP_D = [[.17,.49],[.30,.555],[.40,.62],[.55,.76],[.68,.90],[.78,1.0],[1.0,1.0],[1.0,.53],[.70,.52],[.40,.505],[.17,.485]];
+
+/* ===========================================================================
+   Gestileerde illustraties (fallback als [D] of [E] ontbreekt)
+   =========================================================================== */
+function sceneSVG(nieuw){
+  const trees = (cx,cy,s,c)=>`<g fill="${c}"><circle cx="${cx}" cy="${cy}" r="${60*s}"/><circle cx="${cx-45*s}" cy="${cy+30*s}" r="${48*s}"/><circle cx="${cx+48*s}" cy="${cy+26*s}" r="${50*s}"/><circle cx="${cx}" cy="${cy-45*s}" r="${44*s}"/></g>`;
+  const lerp=(a,b,t)=>a+(b-a)*t;
+  // gevelvlak: links (400) -> rechts (1250); boven y 362->280, onder 462->505
+  const top=x=>lerp(362,280,(x-400)/850), bot=x=>lerp(462,505,(x-400)/850);
+  let ramen='';
+  const n= nieuw?7:9;
+  for(let i=0;i<n;i++){
+    const x1=420+i*(820/n)+8, x2=x1+(820/n)-26;
+    const t1= nieuw? top(x1)+22 : top(x1)+38, t2= nieuw? top(x2)+22 : top(x2)+38;
+    ramen+=`<polygon points="${x1},${t1} ${x2},${t2} ${x2},${bot(x2)-6} ${x1},${bot(x1)-6}" fill="${nieuw?'#cfe2ea':'#5e6a70'}" opacity="${nieuw?.92:.85}"/>`;
+    if(nieuw) ramen+=`<line x1="${(x1+x2)/2}" y1="${(t1+t2)/2}" x2="${(x1+x2)/2}" y2="${(bot(x1)+bot(x2))/2-6}" stroke="#8a6440" stroke-width="3"/>`;
+  }
+  const mens=(x,y,c,s=1)=>`<g transform="translate(${x},${y}) scale(${s})"><circle cx="0" cy="-58" r="9" fill="#e7c3a3"/><rect x="-10" y="-48" width="20" height="30" rx="6" fill="${c}"/><rect x="-8" y="-20" width="7" height="22" fill="#3b4250"/><rect x="1" y="-20" width="7" height="22" fill="#3b4250"/></g>`;
+  const bank=(x,y)=>`<g transform="translate(${x},${y})"><rect x="0" y="0" width="120" height="12" rx="3" fill="#b88a58"/><rect x="0" y="-20" width="120" height="8" rx="3" fill="#a77a4a"/><rect x="8" y="12" width="8" height="18" fill="#555"/><rect x="104" y="12" width="8" height="18" fill="#555"/></g>`;
+  const gebouw = nieuw ? `
+    <polygon points="380,360 1250,262 1250,200 1362,128 1478,198 1478,212 1250,282 400,372" fill="#6f9a45"/>
+    <polygon points="430,355 1230,268 1240,250 440,340" fill="#86b257" opacity=".7"/>
+    <g fill="#2e3b48" opacity=".85"><polygon points="760,318 900,302 905,286 768,302"/><polygon points="930,298 1070,282 1075,266 936,282"/></g>
+    <polygon points="400,370 1250,282 1250,505 400,462" fill="#c08a5a"/>
+    <polygon points="400,370 700,339 700,478 400,462" fill="#a4513a"/>
+    ${ramen}
+    <polygon points="1250,212 1362,140 1478,212 1478,522 1250,505" fill="#a4513a"/>
+    <polygon points="1280,300 1450,296 1450,500 1280,492" fill="#cfe2ea" opacity=".9"/>
+    <polygon points="760,410 980,392 990,402 768,422" fill="#8a6440"/>
+    ${bank(560,560)}${bank(1180,640)}
+    <g fill="#7a9a5a"><circle cx="1050" cy="560" r="26"/><circle cx="1500" cy="600" r="32"/></g>
+    <rect x="1030" y="560" width="40" height="30" fill="#8c9a7a"/><rect x="1470" y="600" width="60" height="44" fill="#8c9a7a"/>
+    ${mens(820,640,'#d06a4c')}${mens(845,650,'#4f8a8b',.8)}${mens(980,700,'#e2b74a',.75)}${mens(1260,740,'#7a5fa0')}${mens(1300,735,'#c95e7a',.85)}${mens(640,610,'#5b8f3c',.9)}
+  ` : `
+    <polygon points="390,362 1250,276 1250,250 410,338" fill="#6d6f70"/>
+    <polygon points="400,362 1250,280 1250,505 400,462" fill="#9b4a37"/>
+    ${ramen}
+    <polygon points="1240,220 1360,168 1480,226 1480,240 1240,240" fill="#5f6163"/>
+    <polygon points="1250,236 1478,236 1478,522 1250,505" fill="#8c4232"/>
+    <polygon points="1290,320 1440,320 1440,500 1290,494" fill="#5e6a70" opacity=".85"/>
+    <rect x="700" y="318" width="220" height="26" fill="#ece6da" transform="skewY(-5.5)" opacity=".9"/>
+    <g fill="#c9c2b4"><rect x="1080" y="520" width="140" height="40"/><rect x="560" y="490" width="90" height="30"/></g>
+  `;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bcd3e0"/><stop offset="1" stop-color="#f1ede2"/></linearGradient>
+  <pattern id="kl" width="26" height="14" patternUnits="userSpaceOnUse"><rect width="26" height="14" fill="#8c8780"/><path d="M0 7h26M13 0v7M0 7v7" stroke="#6f6a64" stroke-width="1.4"/></pattern>
+  <pattern id="br" width="22" height="11" patternUnits="userSpaceOnUse"><rect width="22" height="11" fill="#a3624d"/><path d="M0 5.5h22M11 0v5.5M0 5.5v5.5" stroke="#8a4f3c" stroke-width="1.2"/></pattern></defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  ${trees(1120,170,1.5,'#6d8f4e')}${trees(1500,160,1.9,'#56763c')}${trees(300,330,1,'#7c9a5e')}${trees(150,360,1.1,'#6d8f4e')}
+  <polygon points="0,470 400,440 1600,470 1600,560 0,560" fill="#7d9a5a"/>
+  <polygon points="0,900 700,900 520,640 390,480 330,440 250,440 0,560" fill="url(#kl)"/>
+  <polygon points="700,900 1600,900 1600,540 1470,520 400,462 390,480 520,640" fill="url(#br)"/>
+  <polyline points="700,900 520,640 390,480" fill="none" stroke="#c9c2b4" stroke-width="7"/>
+  ${gebouw}
+  <text x="0" y="0" transform="translate(360,760) rotate(-62) skewX(-18)" font-family="Segoe UI,Arial" font-weight="700" font-size="64" fill="#ffffff" opacity=".7">Lindenlaan</text>
+  <g><rect x="130" y="330" width="22" height="330" fill="#5a4a38"/>${trees(140,300,1.8,'#7fa25a')}</g>
+  </svg>`;
+}
+const svgUri = s => 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
+
+/* ===========================================================================
+   Opbouw
+   =========================================================================== */
+const $ = (s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const NS='http://www.w3.org/2000/svg';
+if(!IMG.D || IMG.D.startsWith('__')) IMG.D = svgUri(sceneSVG(false));
+if(!IMG.E || IMG.E.startsWith('__')) IMG.E = svgUri(sceneSVG(true));
+if(!IMG.E2|| IMG.E2.startsWith('__')) IMG.E2 = IMG.E;
+$$('[data-img]').forEach(el=>el.src=IMG[el.dataset.img]);
+$$('[data-credit]').forEach(el=>{ const t=BRON[el.dataset.credit]; el.innerHTML = t.replace(/\[([^\]]+)\]/g,'<span class="ph">[$1]</span>'); });
+
+const U=UITSNEDE_B_IN_A;
+const toA = ([x,y])=>[U.x + x*U.w/1600, U.y + y*U.h/900];
+const ptsStr = a=>a.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' ');
+$$('[data-grens]').forEach(p=>p.setAttribute('points', ptsStr(p.dataset.grens==='A'?GRENS_B.map(toA):GRENS_B)));
+
+// zoom slide 3
+const zs=1600/U.w;
+$('#s3').style.setProperty('--zoomT',`translate(${-U.x*zs}px,${-U.y*zs}px) scale(${zs})`);
+Object.assign($('#s3 .bimg').style,{left:U.x+'px',top:U.y+'px',width:U.w+'px',height:U.h+'px'});
+// drone slide 7
+$('#s7').style.setProperty('--dx',DRONE_DOEL.x+'px');$('#s7').style.setProperty('--dy',DRONE_DOEL.y+'px');
+
+// pins
+const pinSVG=(c)=>`<svg class="mk" viewBox="0 0 34 46"><path d="M17 45s15-16.5 15-28A15 15 0 0 0 2 17c0 11.5 15 28 15 28z" fill="${c}" stroke="#fff" stroke-width="2.5"/><circle cx="17" cy="17" r="5.5" fill="#fff"/></svg>`;
+PINS.forEach((p,i)=>{
+  const d=document.createElement('div');
+  d.className='pin '+(p.side||'r')+(p.d?' d':'');
+  d.style.cssText=`left:${p.x}px;top:${p.y}px;--i:${i}`;
+  d.innerHTML=pinSVG(p.ph?'#c9a400':'#a4513a')+`<div class="lb${p.ph?' ph':''}">${p.t}</div>`;
+  $('#pins').appendChild(d);
+});
+
+// zones slide 6
+const ICON={
+  huis:'<path d="M4 12 13 4l9 8M6 10v10h14V10M11 20v-5h4v5"/>',
+  bank:'<path d="M3 13h20M5 9h16M6 13v5M20 13v5"/><circle cx="13" cy="5" r="2"/>',
+  boom:'<path d="M13 22v-7"/><path d="M13 3a6 6 0 0 1 5 9.5A4.5 4.5 0 0 1 13 16a4.5 4.5 0 0 1-5-3.5A6 6 0 0 1 13 3z"/>',
+  bal:'<circle cx="13" cy="13" r="9"/><path d="M4.5 10c5 1 12 1 17 0M4.5 16c5-1 12-1 17 0"/>',
+  p:'<path d="M9 21V5h5.5a4.5 4.5 0 0 1 0 9H9"/>',
+  school:'<path d="M3 10 13 5l10 5-10 5z"/><path d="M7 12v5c3 2 9 2 12 0v-5"/>',
+  weg:'<path d="M9 3 6 23M17 3l3 20M13 5v3M13 11v3M13 17v3"/>',
+  pad:'<path d="M7 20c1-4 4-5 6-8s2-6 6-8"/><circle cx="7" cy="20" r="1.5"/><circle cx="19" cy="4" r="1.5"/>'
+};
+const zsvg=$('#zones');
+function poly(pts,kleur){const p=document.createElementNS(NS,'polygon');p.setAttribute('points',ptsStr(pts));p.setAttribute('fill',kleur);p.setAttribute('stroke',kleur);return p;}
+function chip(c,kleur,cls){
+  const d=document.createElement('div');d.className='chip '+cls;
+  d.style.cssText=`left:${c.x}px;top:${c.y}px`;
+  const t=c.t.replace(/\[([^\]]+)\]/g,'<span class="ph">[$1]</span>');
+  d.innerHTML=`<i style="background:${kleur}"><svg viewBox="0 0 26 26">${ICON[c.ic]}</svg></i><span>${t}</span>`;
+  $('#chips').appendChild(d);
+}
+ZONES.forEach(z=>{
+  const g=document.createElementNS(NS,'g');g.setAttribute('filter','url(#zs)');g.setAttribute('opacity','.74');
+  g.appendChild(poly(z.pts,z.kleur)); if(z.pts2) g.appendChild(poly(z.pts2,z.kleur));
+  const w=document.createElementNS(NS,'g');w.setAttribute('class','zone '+z.k);w.appendChild(g); // wrapper voor animatie
+  zsvg.appendChild(w); z.chip.forEach(c=>chip(c,z.kleur,z.k));
+});
+// wegen (stap 5)
+{ const wg=document.createElementNS(NS,'g');wg.setAttribute('class','zone z5');wg.style.transform='none';
+  const pl=WEG.map(l=>'M'+l.map(p=>p.join(',')).join(' L')).join(' ');
+  wg.innerHTML=`<path d="${pl}" fill="none" stroke="#3f4144" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" opacity=".9" filter="url(#zs)"/><path d="${pl}" fill="none" stroke="#f3efe4" stroke-width="2.5" stroke-dasharray="14 12" opacity=".9"/>`;
+  zsvg.appendChild(wg); chip(WEG_CHIP,WEG_CHIP.kleur,'z5'); }
+// route: vloeiende curve door de punten (Catmull-Rom -> Bezier)
+function smooth(p){let d=`M${p[0][0]},${p[0][1]}`;for(let i=0;i<p.length-1;i++){const a=p[i-1]||p[i],b=p[i],c=p[i+1],e=p[i+2]||c;d+=` C${b[0]+(c[0]-a[0])/6},${b[1]+(c[1]-a[1])/6} ${c[0]-(e[0]-b[0])/6},${c[1]-(e[1]-b[1])/6} ${c[0]},${c[1]}`;}return d;}
+// groene wandelroute op verzoek verwijderd (ROUTE blijft als reserve in de code staan)
+$('#routeMaskPath').setAttribute('d',smooth(ROUTE));
+
+// lijntekenen voorbereiden
+function prepDraw(){ $$('.draw, .route-draw').forEach(p=>{ const L=Math.ceil(p.getTotalLength?p.getTotalLength():3000)+2; p.style.strokeDasharray=L; p.style.strokeDashoffset=L; }); }
+// polygon heeft getTotalLength in moderne browsers; anders ruime schatting
+
+/* ===========================================================================
+   Slide 8: afbrokkelen (canvas)
+   =========================================================================== */
+const CW=1920,CH=1080,K=CW/1600;
+let fxRun=null;
+function coverDraw(ctx,img,W,H){const r=Math.max(W/img.naturalWidth,H/img.naturalHeight);const w=img.naturalWidth*r,h=img.naturalHeight*r;ctx.drawImage(img,(W-w)/2,(H-h)/2,w,h);}
+function inPoly(x,y,P){let c=false;for(let i=0,j=P.length-1;i<P.length;j=i++){const [xi,yi]=P[i],[xj,yj]=P[j];if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))c=!c;}return c;}
+function crumble(){
+  const img=$('#s8d'); const bg=$('#s8bg'), fx=$('#s8fx'); const bctx=bg.getContext('2d'), ctx=fx.getContext('2d');
+  const src=document.createElement('canvas');src.width=CW;src.height=CH;const sctx=src.getContext('2d');coverDraw(sctx,img,CW,CH);
+  const P=PAND_D.map(([x,y])=>[x*CW,y*CH]);
+  // achtergrond: zelfde beeld, pandvlak vervangen door wazige "lege" ruimte
+  bctx.clearRect(0,0,CW,CH);bctx.drawImage(src,0,0);
+  const fin=bctx; const cl=document.createElement('canvas');cl.width=CW;cl.height=CH;
+  { const bctx=cl.getContext('2d'); bctx.save();
+  // kleuren van lucht (boven het pand) en grond (eronder) uit het beeld zelf halen
+  const ysP=P.map(p=>p[1]), xsP=P.map(p=>p[0]); const mx=(Math.min(...xsP)+Math.max(...xsP))/2;
+  const pick=(x,y,def)=>{try{const d=sctx.getImageData(Math.round(x)-6,Math.round(y)-6,12,12).data;let r=0,g=0,b=0;for(let i=0;i<d.length;i+=4){r+=d[i];g+=d[i+1];b+=d[i+2];}const n=d.length/4;return `rgb(${r/n|0},${g/n|0},${b/n|0})`;}catch(e){return def;}};
+  const lucht=pick(mx,Math.max(8,Math.min(...ysP)-30),'#dfe6ea'), grond=pick(mx,Math.min(CH-8,Math.max(...ysP)+30),'#b9a789');
+  const yT=Math.min(...ysP), yB=Math.max(...ysP), xL=Math.min(...xsP), xR=Math.max(...xsP);
+  // wat achter het pand ligt: de strook bomen/lucht boven het pand, uitgerekt naar beneden
+  // geen leeg/wit vlak: achter de scherven alleen een stoffige, wazige versie van de foto zelf
+  bctx.filter='blur(34px) saturate(.6)';bctx.drawImage(src,0,0);bctx.filter='none';
+  bctx.fillStyle='rgba(120,104,84,.35)';bctx.fillRect(0,0,CW,CH);
+  // onderrand: overgang naar de bestrating
+  bctx.restore();
+  // zachte rand: masker = pandvlak, vervaagd
+  const m=document.createElement('canvas');m.width=CW;m.height=CH;const mc=m.getContext('2d');
+  mc.filter='blur(24px)';mc.fillStyle='#000';mc.strokeStyle='#000';mc.lineWidth=14;mc.lineJoin='round';
+  mc.beginPath();P.forEach(([x,y],i)=>i?mc.lineTo(x,y):mc.moveTo(x,y));mc.closePath();mc.fill();mc.stroke();
+  bctx.globalCompositeOperation='destination-in';bctx.drawImage(m,0,0);bctx.globalCompositeOperation='source-over'; }
+  fin.drawImage(cl,0,0);
+  bg.style.opacity=1; img.style.opacity=0;
+  // scherven: gejitterd raster binnen het pandvlak
+  const xs=P.map(p=>p[0]),ys=P.map(p=>p[1]);const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const cell=44, nx=Math.ceil((x1-x0)/cell), ny=Math.ceil((y1-y0)/cell); const V=[];
+  for(let j=0;j<=ny;j++){V[j]=[];for(let i=0;i<=nx;i++){const ed=(i===0||j===0||i===nx||j===ny);V[j][i]=[x0+i*cell+(ed?0:(Math.random()-.5)*cell*.7),y0+j*cell+(ed?0:(Math.random()-.5)*cell*.7)];}}
+  const shards=[];
+  for(let j=0;j<ny;j++)for(let i=0;i<nx;i++){
+    const a=V[j][i],b=V[j][i+1],c=V[j+1][i+1],d=V[j+1][i];
+    for(const tri of (Math.random()<.5?[[a,b,c],[a,c,d]]:[[a,b,d],[b,c,d]])){
+      const cx=(tri[0][0]+tri[1][0]+tri[2][0])/3, cy=(tri[0][1]+tri[1][1]+tri[2][1])/3;
+      if(!inPoly(cx,cy,P))continue;
+      const bx=Math.min(...tri.map(t=>t[0]))-1,by=Math.min(...tri.map(t=>t[1]))-1,bw=Math.max(...tri.map(t=>t[0]))-bx+2,bh=Math.max(...tri.map(t=>t[1]))-by+2;
+      const cv=document.createElement('canvas');cv.width=Math.ceil(bw);cv.height=Math.ceil(bh);const c2=cv.getContext('2d');
+      c2.beginPath();tri.forEach(([x,y],k)=>k?c2.lineTo(x-bx,y-by):c2.moveTo(x-bx,y-by));c2.closePath();c2.clip();c2.drawImage(src,-bx,-by);
+      const rel=(cy-y0)/(y1-y0);
+      shards.push({cv,bx,by,cx,cy,vx:(Math.random()-.5)*160+(cx-(x0+x1)/2)*.12,vy:-Math.random()*90,vr:(Math.random()-.5)*5,delay:(1-rel)*.25+Math.random()*.45,alpha:1});
+    }
+  }
+  // stof
+  const dust=[];const baseY=y1-20;
+  for(let i=0;i<260;i++){const x=x0+Math.random()*(x1-x0);dust.push({x,y:baseY-Math.random()*(y1-y0)*.75,r:40+Math.random()*90,vx:(Math.random()-.5)*70,vy:-15-Math.random()*55,delay:.1+Math.random()*1.1,life:2.2+Math.random()*1.6});}
+  const T0=performance.now();const DUR=2600;const G=1500;
+  // nieuw gebouw: uitknippen uit [E] en op de plek van het oude pand zetten
+  const eImg=$('#s8e'); const ef=document.createElement('canvas');ef.width=CW;ef.height=CH;const efc=ef.getContext('2d');coverDraw(efc,eImg,CW,CH);
+  const M=E_NAAR_D; const NP=NIEUW_E.map(([x,y])=>[(M.dx+x*M.sx)*CW,(M.dy+y*M.sy)*CH]);
+  const eb=document.createElement('canvas');eb.width=CW;eb.height=CH;const ebc=eb.getContext('2d');
+  ebc.setTransform(M.sx,0,0,M.sy,M.dx*CW,M.dy*CH);ebc.drawImage(ef,0,0);ebc.setTransform(1,0,0,1,0,0);
+  { const m=document.createElement('canvas');m.width=CW;m.height=CH;const mc=m.getContext('2d');
+    mc.filter='blur(10px)';mc.fillStyle='#000';
+    for(const poly of [NP, STOEP_D.map(([x,y])=>[x*CW,y*CH])]){ mc.beginPath();poly.forEach(([x,y],i)=>i?mc.lineTo(x,y):mc.moveTo(x,y));mc.closePath();mc.fill(); }
+    ebc.globalCompositeOperation='destination-in';ebc.drawImage(m,0,0);ebc.globalCompositeOperation='source-over'; }
+  const nyT=Math.min(...NP.map(p=>p[1])), nyB=CH;
+  const nw=$('#s8new'), nctx=nw.getContext('2d'); nctx.clearRect(0,0,CW,CH);
+  const RISE_START=.25, RISE_DUR=3.4;
+  // midden in de stofwolk: tekst, gloed en bronvermelding
+  clearTimeout(riseT); riseT=setTimeout(()=>{ $('#s8').classList.add('st2'); $('#s8credit').textContent='© Google · nieuw gebouw: impressie, indicatief'; },850);
+  function drawRise(t){
+    const p=Math.min(1,Math.max(0,(t-RISE_START)/RISE_DUR)); if(p<=0)return; const e=1-Math.pow(1-p,3);
+    nctx.clearRect(0,0,CW,CH);
+    // onthulling van onder naar boven, begint al op een derde zodat er nooit een leeg vlak is
+    const Hn=nyB-nyT, feather=Hn*.4, line=nyB-Hn*(.35+.85*e);
+    nctx.save(); nctx.globalAlpha=Math.min(1,p*3);
+    nctx.filter=`blur(${(1-e)*12}px) sepia(${(1-e)*.45}) saturate(${.7+.3*e})`;
+    nctx.drawImage(eb,0,0); nctx.filter='none';
+    nctx.globalCompositeOperation='destination-in';
+    const g=nctx.createLinearGradient(0,line-feather,0,line); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,'#000');
+    nctx.globalAlpha=1; nctx.fillStyle=g; nctx.fillRect(0,0,CW,CH); nctx.restore();
+  }
+  cancelAnimationFrame(fxRun);
+  (function frame(now){
+    const t=(now-T0)/1000; ctx.clearRect(0,0,CW,CH); drawRise(t);
+    for(const s of shards){
+      const tt=Math.max(0,t-s.delay);
+      const x=s.vx*tt, y=s.vy*tt+.5*G*tt*tt, r=s.vr*tt, a=Math.max(0,1-Math.max(0,tt-.35)/.9);
+      if(a<=0)continue; ctx.globalAlpha=a;
+      ctx.save();ctx.translate(s.cx+x,s.cy+y);ctx.rotate(r);ctx.drawImage(s.cv,s.bx-s.cx,s.by-s.cy);ctx.restore();
+    }
+    for(const p of dust){
+      const tt=t-p.delay; if(tt<0||tt>p.life)continue; const k=tt/p.life;
+      ctx.globalAlpha=.5*Math.sin(Math.PI*k);
+      const rr=p.r*(.6+k*1.3); const g=ctx.createRadialGradient(p.x+p.vx*tt,p.y+p.vy*tt,0,p.x+p.vx*tt,p.y+p.vy*tt,rr);
+      g.addColorStop(0,'rgba(168,150,124,.85)');g.addColorStop(1,'rgba(168,150,124,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x+p.vx*tt,p.y+p.vy*tt,rr,0,7);ctx.fill();
+    }
+    ctx.globalAlpha=1;
+    if(now-T0<Math.max(DUR+2400,(RISE_START+RISE_DUR)*1000+100)) fxRun=requestAnimationFrame(frame); else { ctx.clearRect(0,0,CW,CH); drawRise(99); }
+  })(T0);
+}
+let riseT=null;
+function resetS8(){clearTimeout(riseT);cancelAnimationFrame(fxRun);$('#s8new').getContext('2d').clearRect(0,0,CW,CH);$('#s8fx').getContext('2d').clearRect(0,0,CW,CH);$('#s8bg').style.opacity=0;$('#s8d').style.opacity=1;$('#s8credit').innerHTML=$('#s8credit').dataset.orig;}
+$('#s8credit').dataset.orig=$('#s8credit').innerHTML;
+
+/* ===========================================================================
+   Navigatie
+   =========================================================================== */
+const SLIDES=[
+  {steps:0},{steps:1},{steps:1},{steps:1},{steps:5},
+  {steps:5},{steps:1},
+  {steps:1, on:{1:crumble}, reset:resetS8},
+  {steps:3},{steps:2}
+];
+const LIGHT=new Set([4,8]);
+const els=$$('.slide'); let cur=0, step=0;
+const prog=$('#prog'); SLIDES.forEach(()=>{const s=document.createElement('div');s.className='seg';s.innerHTML='<i></i>';prog.appendChild(s);});
+function updProg(){
+  $$('.seg i',prog).forEach((b,i)=>{const n=SLIDES[i].steps;b.style.width=(i<cur?100:i>cur?0:(n?Math.max(8,step/n*100):100))+'%';});
+  prog.classList.toggle('light',LIGHT.has(cur));$('#cnt').classList.toggle('light',LIGHT.has(cur));$('#cnt').textContent=(cur+1)+' / '+SLIDES.length;
+}
+function resetSlide(i){
+  const el=els[i]; el.classList.add('noanim');
+  for(let k=1;k<=6;k++) el.classList.remove('st'+k);
+  SLIDES[i].reset&&SLIDES[i].reset();
+  void el.offsetWidth; el.classList.remove('noanim');
+}
+function show(i){
+  if(i<0||i>=els.length)return;
+  els.forEach((e,k)=>e.classList.toggle('on',k===i));
+  resetSlide(i); cur=i; step=0; updProg();
+}
+function next(){
+  const s=SLIDES[cur];
+  if(step<s.steps){ step++; els[cur].classList.add('st'+step); s.on&&s.on[step]&&s.on[step](); updProg(); }
+  else show(cur+1);
+}
+function prev(){ show(cur-1); }
+function replay(){ const el=els[cur]; resetSlide(cur); // ook keyframe-animaties herstarten
+  $$('*',el).concat([el]).forEach(n=>{const a=n.style.animation;n.style.animation='none';void n.offsetWidth;n.style.animation=a;}); step=0; updProg(); }
+
+addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();next();}
+  else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();prev();}
+  else if(e.key==='r'||e.key==='R')replay();
+  else if(e.key==='f'||e.key==='F')toggleFS();
+  else if(e.key==='Home')show(0); else if(e.key==='End')show(els.length-1);
+});
+addEventListener('click',e=>{ if(e.target.id==='fsbtn')return; next(); });
+addEventListener('contextmenu',e=>{e.preventDefault();prev();});
+function toggleFS(){ if(!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
+$('#fsbtn').addEventListener('click',toggleFS);
+function fit(){ const s=Math.min(innerWidth/1600,innerHeight/900); $('#stage').style.transform=`scale(${s})`; }
+addEventListener('resize',fit); fit();
+window.addEventListener('load',()=>{ prepDraw(); });
+prepDraw(); show(0);
+</script>
+</body>
+</html>
